@@ -4,7 +4,7 @@
 
 Match-3 game with heroes: You get a house/castle to build items in X by X grid. Those items have different tiers & bonuses (And maybe adjacency bonuses). Costs are spread between 6 currency items. To match-3, you need heroes. You will start the game with 1-4 heroes. They have special abilities,stats and matching techniques. The heroes go on an “Adventure” (Kind of a room-based design, where they fight and advance to the next room.). Each room/run has different bonuses & penalties. Depending on affinity the monsters and heroes have the element color highlights.  
   
-##Castle:   
+## Castle:   
 Grid X by X, upgrade-able, exponentially expensive.
 
 Items that get placed:
