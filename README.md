@@ -1,6 +1,6 @@
-#Match Up
+# Match Up
 
-##Concept
+## Concept
 
 Match-3 game with heroes: You get a house/castle to build items in X by X grid. Those items have different tiers & bonuses (And maybe adjacency bonuses). Costs are spread between 6 currency items. To match-3, you need heroes. You will start the game with 1-4 heroes. They have special abilities,stats and matching techniques. The heroes go on an “Adventure” (Kind of a room-based design, where they fight and advance to the next room.). Each room/run has different bonuses & penalties. Depending on affinity the monsters and heroes have the element color highlights.  
   
@@ -22,7 +22,7 @@ Items that get placed:
  - Darkness well  
 
 
-##Run:  
+## Run:  
 
 Map with all affinities as runs, but can choose only 3 at a time  
 
@@ -34,7 +34,7 @@ Multiple rooms, goes to infinity OR Multiple run types (levels), goes to level X
  - Clear dungeon -> find the exit  
 
 
-##Heroes:  
+## Heroes:  
 
 Buy them from a shop, they reset after every run?  
 Gacha heroes to unlock?  
@@ -58,7 +58,7 @@ Elements:
  - Normal - 3 heroes  
 
 
-##Guild:  
+## Guild:  
 Buildings - Donate to guild for resources  
 Trade resources  
 Daily enemy -> get resources  
