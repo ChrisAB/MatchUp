@@ -6,19 +6,18 @@ Match-3 game with heroes: You get a house/castle to build items in X by X grid. 
 Castle:
 Grid X by X, upgrade-able, exponentially expensive.
 Items that get placed:
-Wood bin
-Stone bin
-Food bin
-Coin bin
-Metal bin
-Fire well
-Electro well
-Stone well
-Water well
-Ice well
-Healing well
-
-Darkness well
+Wood bin  
+Stone bin  
+Food bin  
+Coin bin  
+Metal bin  
+Fire well  
+Electro well  
+Stone well  
+Water well  
+Ice well  
+Healing well  
+Darkness well  
 
 
 Run:
