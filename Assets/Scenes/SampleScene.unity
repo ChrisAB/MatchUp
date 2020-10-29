@@ -237,6 +237,8 @@ MonoBehaviour:
   yDim: 6
   piecePrefabs:
   - type: 0
+    prefab: {fileID: 148937984769196331, guid: a0fc39f15eb2022f78b7e54c38caa4e4, type: 3}
+  - type: 1
     prefab: {fileID: 174492, guid: f6090629d79e1a34db1e37f9f517d5a2, type: 3}
   backgroundPrefab: {fileID: 126596, guid: 86f7705ed2388c64294da188eff4bc1b, type: 3}
 --- !u!4 &868545081
