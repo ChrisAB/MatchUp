@@ -9,6 +9,7 @@ public class Grid : MonoBehaviour
   {
     EMPTY,
     NORMAL,
+    BUBBLE,
     COUNT,
   };
 
@@ -21,7 +22,7 @@ public class Grid : MonoBehaviour
 
   public int xDim;
   public int yDim;
-
+  public float fillTime;
   public PiecePrefab[] piecePrefabs;
   public GameObject backgroundPrefab;
 
@@ -59,6 +60,8 @@ public class Grid : MonoBehaviour
         SpawnNewPiece(x, y, PieceType.EMPTY);
       }
     }
+
+    StartCoroutine(Fill());
   }
 
   // Update is called once per frame
@@ -73,9 +76,12 @@ public class Grid : MonoBehaviour
       transform.position.y + yDim / 2.0f - y);
   }
 
-  public void Fill()
+  public IEnumerator Fill()
   {
-
+    while (FillStep())
+    {
+      yield return new WaitForSeconds(fillTime);
+    }
   }
 
   public bool FillStep()
@@ -92,7 +98,8 @@ public class Grid : MonoBehaviour
           GamePiece pieceBelow = pieces[x, y + 1];
           if (pieceBelow.Type == PieceType.EMPTY)
           {
-            piece.MovableComponent.Move(x, y + 1);
+            Destroy(pieceBelow.gameObject);
+            piece.MovableComponent.Move(x, y + 1, fillTime);
             pieces[x, y + 1] = piece;
             SpawnNewPiece(x, y, PieceType.EMPTY);
             movedPiece = true;
@@ -107,12 +114,13 @@ public class Grid : MonoBehaviour
 
       if (pieceBelow.Type == PieceType.EMPTY)
       {
+        Destroy(pieceBelow.gameObject);
         GameObject newPiece = (GameObject)Instantiate(piecePrefabDict[PieceType.NORMAL], GetWorldPosition(x, -1), Quaternion.identity);
         newPiece.transform.parent = transform;
 
         pieces[x, 0] = newPiece.GetComponent<GamePiece>();
         pieces[x, 0].Init(x, -1, this, PieceType.NORMAL);
-        pieces[x, 0].MovableComponent.Move(x, 0);
+        pieces[x, 0].MovableComponent.Move(x, 0, fillTime);
         pieces[x, 0].MaterialComponent.SetMaterial((MaterialPiece.MaterialType)Random.Range(0, pieces[x, 0].MaterialComponent.NumMaterials));
         movedPiece = true;
       }
