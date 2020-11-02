@@ -87,10 +87,18 @@ public class Grid : MonoBehaviour
 
   public IEnumerator Fill()
   {
-    while (FillStep())
+    bool needsRefill = true;
+
+    while (needsRefill)
     {
-      inverse = !inverse;
       yield return new WaitForSeconds(fillTime);
+
+      while (FillStep())
+      {
+        inverse = !inverse;
+        yield return new WaitForSeconds(fillTime);
+      }
+      needsRefill = ClearAllValidMatches();
     }
   }
 
@@ -210,11 +218,22 @@ public class Grid : MonoBehaviour
       pieces[piece1.X, piece1.Y] = piece2;
       pieces[piece2.X, piece2.Y] = piece1;
 
-      int piece1X = piece1.X;
-      int piece1Y = piece1.Y;
+      if (GetMatch(piece1, piece2.X, piece2.Y) != null || GetMatch(piece2, piece1.X, piece1.Y) != null)
+      {
+        int piece1X = piece1.X;
+        int piece1Y = piece1.Y;
 
-      piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
-      piece2.MovableComponent.Move(piece1X, piece1Y, fillTime);
+        piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
+        piece2.MovableComponent.Move(piece1X, piece1Y, fillTime);
+
+        ClearAllValidMatches();
+        StartCoroutine(Fill());
+      }
+      else
+      {
+        pieces[piece1.X, piece1.Y] = piece1;
+        pieces[piece2.X, piece2.Y] = piece2;
+      }
     }
   }
 
@@ -234,5 +253,160 @@ public class Grid : MonoBehaviour
     {
       SwapPieces(pressedPiece, enteredPiece);
     }
+  }
+
+  public List<GamePiece> GetMatch(GamePiece piece, int newX, int newY)
+  {
+    if (piece.IsMaterial())
+    {
+      MaterialPiece.MaterialType material = piece.MaterialComponent.Material;
+      List<GamePiece> horizontalPieces = new List<GamePiece>();
+      List<GamePiece> verticalPieces = new List<GamePiece>();
+      List<GamePiece> matchingPieces = new List<GamePiece>();
+
+      // Check horizontally. Create separate function later
+      horizontalPieces.Add(piece);
+      for (int dir = 0; dir <= 1; dir++)
+      {
+        for (int xOffset = 1; xOffset < xDim; xOffset++)
+        {
+          int x;
+
+          if (dir == 0)
+            x = newX - xOffset;
+          else
+            x = newX + xOffset;
+
+          if (x <= 0 || x >= xDim)
+            break;
+
+          if (pieces[x, newY].IsMaterial() && pieces[x, newY].MaterialComponent.Material == material)
+            horizontalPieces.Add(pieces[x, newY]);
+          else
+            break;
+        }
+      }
+
+      //Check T or L shape
+      if (horizontalPieces.Count >= 3)
+      {
+        for (int i = 0; i < horizontalPieces.Count; i++)
+          matchingPieces.Add(horizontalPieces[i]);
+
+        for (int i = 0; i < horizontalPieces.Count; i++)
+        {
+          for (int dir = 0; dir <= 1; dir++)
+          {
+            for (int yOffset = 1; yOffset < yDim; yOffset++)
+            {
+              int y;
+
+              if (dir == 0)
+                y = newY - yOffset;
+              else
+                y = newY + yOffset;
+
+              if (y < 0 || y >= yDim)
+                break;
+
+              if (pieces[horizontalPieces[i].X, y].IsMaterial() && pieces[horizontalPieces[i].X, y].MaterialComponent.Material == material)
+                verticalPieces.Add(pieces[horizontalPieces[i].X, y]);
+              else
+                break;
+            }
+          }
+          if (verticalPieces.Count < 2)
+            verticalPieces.Clear();
+          else
+          {
+            for (int j = 0; j < verticalPieces.Count; j++)
+              matchingPieces.Add(verticalPieces[j]);
+            break;
+          }
+        }
+      }
+
+      if (matchingPieces.Count >= 3)
+      {
+        return matchingPieces;
+      }
+
+      //Check vertically. Add separate function later
+      verticalPieces.Clear();
+      horizontalPieces.Clear();
+      verticalPieces.Add(piece);
+      for (int dir = 0; dir <= 1; dir++)
+      {
+        for (int yOffset = 1; yOffset < yDim; yOffset++)
+        {
+          int y;
+
+          if (dir == 0)
+            y = newY - yOffset;
+          else
+            y = newY + yOffset;
+
+          if (y <= 0 || y >= yDim)
+            break;
+
+          if (pieces[newX, y].IsMaterial() && pieces[newX, y].MaterialComponent.Material == material)
+            verticalPieces.Add(pieces[newX, y]);
+          else
+            break;
+        }
+      }
+
+      if (verticalPieces.Count >= 3)
+      {
+        for (int i = 0; i < verticalPieces.Count; i++)
+          matchingPieces.Add(verticalPieces[i]);
+      }
+
+      if (matchingPieces.Count >= 3)
+      {
+        return matchingPieces;
+      }
+    }
+    return null;
+  }
+
+  public bool ClearAllValidMatches()
+  {
+    bool needsRefill = false;
+
+    for (int y = 0; y < yDim; y++)
+    {
+      for (int x = 0; x < xDim; x++)
+      {
+        if (pieces[x, y].IsClearable())
+        {
+          List<GamePiece> match = GetMatch(pieces[x, y], x, y);
+          if (match != null)
+          {
+            for (int i = 0; i < match.Count; i++)
+            {
+              if (ClearPiece(match[i].X, match[i].Y))
+              {
+                needsRefill = true;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return needsRefill;
+  }
+
+  public bool ClearPiece(int x, int y)
+  {
+    if (pieces[x, y].IsClearable() && !pieces[x, y].ClearableComponent.IsBeingCleared)
+    {
+      pieces[x, y].ClearableComponent.Clear();
+      SpawnNewPiece(x, y, PieceType.EMPTY);
+      return true;
+
+    }
+    return false;
   }
 }
