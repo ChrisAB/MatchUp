@@ -32,6 +32,9 @@ public class Grid : MonoBehaviour
 
   private bool inverse = false;
 
+  private GamePiece pressedPiece;
+  private GamePiece enteredPiece;
+
   // Use this for initialization
   void Start()
   {
@@ -193,5 +196,43 @@ public class Grid : MonoBehaviour
     pieces[x, y].Init(x, y, this, type);
 
     return pieces[x, y];
+  }
+
+  public bool IsAdjacent(GamePiece piece1, GamePiece piece2)
+  {
+    return (piece1.X == piece2.X && (int)Mathf.Abs(piece1.Y - piece2.Y) == 1) || (piece1.Y == piece2.Y && (int)Mathf.Abs(piece1.X - piece2.X) == 1);
+  }
+
+  public void SwapPieces(GamePiece piece1, GamePiece piece2)
+  {
+    if (piece1.IsMovable() && piece2.IsMovable())
+    {
+      pieces[piece1.X, piece1.Y] = piece2;
+      pieces[piece2.X, piece2.Y] = piece1;
+
+      int piece1X = piece1.X;
+      int piece1Y = piece1.Y;
+
+      piece1.MovableComponent.Move(piece2.X, piece2.Y, fillTime);
+      piece2.MovableComponent.Move(piece1X, piece1Y, fillTime);
+    }
+  }
+
+  public void PressPiece(GamePiece piece)
+  {
+    pressedPiece = piece;
+  }
+
+  public void EnterPiece(GamePiece piece)
+  {
+    enteredPiece = piece;
+  }
+
+  public void ReleasePiece()
+  {
+    if (IsAdjacent(pressedPiece, enteredPiece))
+    {
+      SwapPieces(pressedPiece, enteredPiece);
+    }
   }
 }
