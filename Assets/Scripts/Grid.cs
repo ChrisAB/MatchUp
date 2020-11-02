@@ -36,6 +36,8 @@ public class Grid : MonoBehaviour
   private GamePiece pressedPiece;
   private GamePiece enteredPiece;
 
+  public Level level;
+
   // Use this for initialization
   void Start()
   {
@@ -242,7 +244,12 @@ public class Grid : MonoBehaviour
 
         ClearAllValidMatches();
 
+        pressedPiece = null;
+        enteredPiece = null;
+
         StartCoroutine(Fill());
+
+        level.OnMove();
       }
       else
       {
@@ -498,6 +505,18 @@ public class Grid : MonoBehaviour
 
           if (match != null)
           {
+            if (match.Count == 4)
+            {
+              // STUB: INCREASE ATTACK WITH 10%
+            }
+            else if (match.Count == 5)
+            {
+              // STUB: SPECIAL ATTACK
+            }
+            else if (match.Count == 7)
+            {
+              // STUB: SPECIAL ATTACK WITH +10% ATTACK
+            }
             for (int i = 0; i < match.Count; i++)
             {
               if (ClearPiece(match[i].X, match[i].Y))

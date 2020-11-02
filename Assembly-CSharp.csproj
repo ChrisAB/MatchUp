@@ -37,9 +37,13 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\ClearablePiece.cs" />
+     <Compile Include="Assets\Scripts\ColorPiece.cs" />
      <Compile Include="Assets\Scripts\GamePiece.cs" />
      <Compile Include="Assets\Scripts\Grid.cs" />
+     <Compile Include="Assets\Scripts\Hero.cs" />
+     <Compile Include="Assets\Scripts\Level.cs" />
      <Compile Include="Assets\Scripts\MaterialPiece.cs" />
+     <Compile Include="Assets\Scripts\Monster.cs" />
      <Compile Include="Assets\Scripts\MovablePiece.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/chrisab/Unity/UnityEditors/2019.4.12f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
