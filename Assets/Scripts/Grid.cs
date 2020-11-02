@@ -30,6 +30,8 @@ public class Grid : MonoBehaviour
 
   private GamePiece[,] pieces;
 
+  private bool inverse = false;
+
   // Use this for initialization
   void Start()
   {
@@ -61,6 +63,10 @@ public class Grid : MonoBehaviour
       }
     }
 
+    Destroy(pieces[4, 4].gameObject);
+
+    SpawnNewPiece(4, 4, PieceType.BUBBLE);
+
     StartCoroutine(Fill());
   }
 
@@ -80,6 +86,7 @@ public class Grid : MonoBehaviour
   {
     while (FillStep())
     {
+      inverse = !inverse;
       yield return new WaitForSeconds(fillTime);
     }
   }
@@ -87,11 +94,16 @@ public class Grid : MonoBehaviour
   public bool FillStep()
   {
     bool movedPiece = false;
-
     for (int y = yDim - 2; y >= 0; y--)
     {
-      for (int x = 0; x < xDim; x++)
+      int x;
+      for (int loopX = 0; loopX < xDim; loopX++)
       {
+        x = loopX;
+
+        if (inverse)
+          x = xDim - 1 - loopX;
+
         GamePiece piece = pieces[x, y];
         if (piece.IsMovable())
         {
@@ -103,6 +115,49 @@ public class Grid : MonoBehaviour
             pieces[x, y + 1] = piece;
             SpawnNewPiece(x, y, PieceType.EMPTY);
             movedPiece = true;
+          }
+          else
+          {
+            for (int diag = -1; diag <= 1; diag++)
+            {
+              if (diag != 0)
+              {
+                int diagX = x + diag;
+                if (inverse)
+                  diagX = x - diag;
+
+                if (diagX >= 0 && diagX < xDim)
+                {
+                  GamePiece diagonalPiece = pieces[diagX, y + 1];
+                  if (diagonalPiece.Type == PieceType.EMPTY)
+                  {
+                    bool hasPieceAbove = true;
+                    for (int aboveY = y; aboveY >= 0; aboveY--)
+                    {
+                      GamePiece pieceAbove = pieces[diagX, aboveY];
+                      if (pieceAbove.IsMovable())
+                        break;
+                      else if (!pieceAbove.IsMovable() && pieceAbove.Type != PieceType.EMPTY)
+                      {
+                        hasPieceAbove = false;
+                        break;
+                      }
+                    }
+
+                    if (!hasPieceAbove)
+                    {
+                      Destroy(diagonalPiece.gameObject);
+                      piece.MovableComponent.Move(diagX, y + 1, fillTime);
+                      pieces[diagX, y + 1] = piece;
+                      SpawnNewPiece(x, y, PieceType.EMPTY);
+                      movedPiece = true;
+                      break;
+                    }
+                  }
+
+                }
+              }
+            }
           }
         }
       }
