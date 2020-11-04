@@ -8,7 +8,15 @@ const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const authController = require('./controllers/authController');
+const bannerRoute = require('./routes/bannerRoute');
+const castleRoute = require('./routes/castleRoute');
+const dungeonRoute = require('./routes/dungeonRoute');
+const heroRoute = require('./routes/heroRoute');
+const itemRoute = require('./routes/itemRoute');
+const monsterRoute = require('./routes/monsterRoute');
+const roomRoute = require('./routes/roomRoute');
+const userHeroRoute = require('./routes/userHeroRoute');
+const userRoute = require('./routes/userRoute');
 
 const app = express();
 
@@ -21,6 +29,17 @@ app.use(cors(corsOptions));
 
 // Set security HTTP headers
 app.use(helmet());
+
+app.use('/api/v1/banner', bannerRoute);
+app.use('/api/v1/castle', castleRoute);
+app.use('/api/v1/dungeon', dungeonRoute);
+app.use('/api/v1/hero', heroRoute);
+app.use('/api/v1/item', itemRoute);
+app.use('/api/v1/monster', monsterRoute);
+app.use('/api/v1/room', roomRoute);
+app.use('/api/v1/userhero', userHeroRoute);
+app.use('/api/v1/user', userRoute);
+
 
 // Limit request from same user
 const limiter = rateLimit({

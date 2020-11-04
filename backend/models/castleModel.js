@@ -4,9 +4,10 @@ const Schema = mongoose.Schema;
 
 const castleSchema = new Schema({
   user: { type: ObjectId, ref: 'User' },
-  level: { type: Number },
-  type: { type: String },
-  rooms: [{ item: { type: ObjectId, ref: 'Item' }, position: { x: { type: Number }, y: { type: Number } } }]
+  gridLevel: { type: Number },
+  heroes: [{ type: ObjectId, ref: 'UserHero' }],
+  size: [{ x: { type: Number }, y: { type: Number } }],
+  items: [{ itemType: { type: ObjectId, ref: 'Item' }, position: { x: { type: Number }, y: { type: Number } } }],
 });
 
 const Castle = mongoose.model("Castle", castleSchema);
