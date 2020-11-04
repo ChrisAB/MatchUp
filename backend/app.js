@@ -30,17 +30,6 @@ app.use(cors(corsOptions));
 // Set security HTTP headers
 app.use(helmet());
 
-app.use('/api/v1/banner', bannerRoute);
-app.use('/api/v1/castle', castleRoute);
-app.use('/api/v1/dungeon', dungeonRoute);
-app.use('/api/v1/hero', heroRoute);
-app.use('/api/v1/item', itemRoute);
-app.use('/api/v1/monster', monsterRoute);
-app.use('/api/v1/room', roomRoute);
-app.use('/api/v1/userhero', userHeroRoute);
-app.use('/api/v1/user', userRoute);
-
-
 // Limit request from same user
 const limiter = rateLimit({
   max: 1000,
@@ -71,6 +60,16 @@ app.use((req, res, next) => {
   console.log(req.query);
   next();
 });
+
+app.use('/api/v1/banner', bannerRoute);
+app.use('/api/v1/castle', castleRoute);
+app.use('/api/v1/dungeon', dungeonRoute);
+app.use('/api/v1/hero', heroRoute);
+app.use('/api/v1/item', itemRoute);
+app.use('/api/v1/monster', monsterRoute);
+app.use('/api/v1/room', roomRoute);
+app.use('/api/v1/userhero', userHeroRoute);
+app.use('/api/v1/user', userRoute);
 
 // 404 Error not found handler
 app.all('*', (req, res, next) => {
