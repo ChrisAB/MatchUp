@@ -36,6 +36,7 @@ public class Grid : MonoBehaviour
   private GamePiece pressedPiece;
   private GamePiece enteredPiece;
 
+  private bool gameOver = false;
   public Level level;
 
   // Use this for initialization
@@ -228,6 +229,9 @@ public class Grid : MonoBehaviour
 
   public void SwapPieces(GamePiece piece1, GamePiece piece2)
   {
+    if (gameOver)
+      return;
+
     if (piece1.IsMovable() && piece2.IsMovable())
     {
       pieces[piece1.X, piece1.Y] = piece2;
@@ -505,13 +509,16 @@ public class Grid : MonoBehaviour
 
           if (match != null)
           {
+            level.OnPiecesMatch(match);
             if (match.Count == 4)
             {
               // STUB: INCREASE ATTACK WITH 10%
+
             }
             else if (match.Count == 5)
             {
               // STUB: SPECIAL ATTACK
+
             }
             else if (match.Count == 7)
             {
@@ -572,5 +579,10 @@ public class Grid : MonoBehaviour
         }
       }
     }
+  }
+
+  public void GameOver()
+  {
+    gameOver = true;
   }
 }

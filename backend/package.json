@@ -1,0 +1,59 @@
+{
+  "name": "matchup",
+  "version": "0.0.1",
+  "description": "Backend for MatchUp",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon index.js",
+    "start:prod": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisAB/MatchUp.git"
+  },
+  "author": "Adrian-Cristian BATRIN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisAB/MatchUp/issues"
+  },
+  "homepage": "https://github.com/ChrisAB/MatchUp#readme",
+  "prettier": "@airbnb/prettier-config",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "concat-stream": "^2.0.0",
+    "cors": "^2.8.5",
+    "discord.js": "^12.4.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.0.0",
+    "express-rate-limit": "^5.1.3",
+    "helmet": "^3.23.3",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.22",
+    "node-fetch": "^2.6.0",
+    "nodemailer": "^6.4.10",
+    "nodemon": "^2.0.4",
+    "qs": "^6.9.4",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "stripe": "^8.69.0",
+    "typescript": "^3.9.6",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.5.0",
+    "@typescript-eslint/parser": "^3.5.0",
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
+  },
+  "engines": {
+    "node": ">=12.18.2"
+  }
+}

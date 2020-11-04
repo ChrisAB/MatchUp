@@ -33,11 +33,14 @@ public class Level : MonoBehaviour
 
   public virtual void GameWin()
   {
+    grid.GameOver();
     Debug.Log("You win");
   }
 
   public virtual void GameLose()
   {
+    grid.GameOver();
+
     Debug.Log("You lose");
   }
 
@@ -47,7 +50,7 @@ public class Level : MonoBehaviour
       monsters[i].DoDamage(heroes);
   }
 
-  public virtual void OnPieceClear(GamePiece piece)
+  public virtual void OnPiecesMatch(List<GamePiece> pieces)
   {
     //Remove HP Of Monster
     //Remove HP Of Player if Monser attacks
