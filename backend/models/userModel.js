@@ -8,7 +8,8 @@ const userSchema = new Schema({
   castle: { type: ObjectId, ref: 'Castle' },
   heroes: [{ type: ObjectId, ref: 'UserHero' }],
   unlockedHeroes: [{ type: ObjectId, ref: 'Hero' }],
-  resources: [{ type: { type: String }, amount: { type: Number } }]
+  resources: [{ type: { type: String }, amount: { type: Number } }],
+  enabled: { type: Boolean, default: true }
 });
 
 const User = mongoose.model("User", userSchema);

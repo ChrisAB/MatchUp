@@ -8,7 +8,8 @@ const dungeonSchema = new Schema({
   type: { type: String },
   size: { x: { type: Number }, y: { type: Number } },
   rooms: [{ room: { type: ObjectId, ref: 'Room' }, position: { x: { type: Number }, y: { type: Number } } }],
-  loot: [{ type: { type: String }, amount: { type: Number } }]
+  loot: [{ type: { type: String }, amount: { type: Number } }],
+  active: { type: Boolean, default: true }
 });
 
 const Dungeon = mongoose.model("Dungeon", dungeonSchema);

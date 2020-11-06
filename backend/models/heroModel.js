@@ -11,7 +11,8 @@ const heroSchema = new Schema({
   specialAttack: { type: { type: String }, damage: { type: Number }, bonuses: [{ type: String }] },
   ultimateAttack: { type: { type: String }, damage: { type: Number }, bonuses: [{ type: String }], matchRequirement: { type: Number } },
   description: { type: String },
-  costs: [{ type: { type: String }, amount: { type: Number } }]
+  costs: [{ type: { type: String }, amount: { type: Number } }],
+  enabled: { type: Boolean, default: true }
 });
 
 const Hero = mongoose.model("Hero", heroSchema);
