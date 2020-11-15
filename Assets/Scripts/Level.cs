@@ -9,20 +9,23 @@ public class Level : MonoBehaviour
   {
     NORMAL,
     TIMER,
-    MOVES,
+    SURVIVE_MOVES,
   }
 
   public Grid grid;
+  public HUD hud;
 
   protected List<Monster> monsters;
   protected List<Hero> heroes;
 
-  protected LevelType level;
+  protected LevelType type;
 
   // Start is called before the first frame update
   void Start()
   {
-
+    hud.SetMonsters(monsters);
+    hud.SetHeroes(heroes);
+    hud.SetLevelType(LevelType.NORMAL);
   }
 
   // Update is called once per frame
@@ -34,13 +37,14 @@ public class Level : MonoBehaviour
   public virtual void GameWin()
   {
     grid.GameOver();
+    hud.OnGameWin();
     Debug.Log("You win");
   }
 
   public virtual void GameLose()
   {
     grid.GameOver();
-
+    hud.OnGameLose();
     Debug.Log("You lose");
   }
 

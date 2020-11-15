@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
+    private int healthPoints;
+    private int maxHealthPoints;
+    private int ultimateBarCharge;
+    private int ultimateRequirement;
+    private int name;
+
+    public int HealthPoints {
+        get { return healthPoints; }
+        set { SetHealthPoints(value); }
+    }
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +27,9 @@ public class Hero : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void SetHealthPoints(int value) {
+        healthPoints = value;
     }
 }

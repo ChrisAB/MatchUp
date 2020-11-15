@@ -42,30 +42,8 @@ public class Grid : MonoBehaviour
   private bool gameOver = false;
   public Level level;
 
-  void Awake() {
-    PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-        // enables saving game progress.
-        .EnableSavedGames()
-        // requests the email address of the player be available.
-        // Will bring up a prompt for consent.
-        .RequestEmail()
-        // requests a server auth code be generated so it can be passed to an
-        //  associated back end server application and exchanged for an OAuth token.
-        .RequestServerAuthCode(false)
-        // requests an ID token be generated.  This OAuth token can be used to
-        //  identify the player to other services such as Firebase.
-        .RequestIdToken()
-        .Build();
-
-    PlayGamesPlatform.InitializeInstance(config);
-    // recommended for debugging:
-    PlayGamesPlatform.DebugLogEnabled = true;
-    // Activate the Google Play Games platform
-    PlayGamesPlatform.Activate();
-  }
-
   // Use this for initialization
-  void Start()
+  void Awake()
   {
     PlayGamesPlatform.Instance.Authenticate(SignInInteractivity.CanPromptAlways, (result) =>{
         Debug.Log("I was here");
@@ -614,5 +592,17 @@ public class Grid : MonoBehaviour
   public void GameOver()
   {
     gameOver = true;
+  }
+
+  public List<GamePiece> GetPiecesOfType(PieceType type) {
+    List<GamePiece> piecesOfType = new List<GamePiece>();
+
+    for(int x = 0; x < xDim; x++) {
+      for(int y = 0; y < yDim; y++) {
+        if(pieces[x,y].Type == type)
+         piecesOfType.Add(pieces[x,y]);
+      }
+    }
+    return piecesOfType;
   }
 }
