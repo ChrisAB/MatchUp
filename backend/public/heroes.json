@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Fire Paladin",
+    "elementType": "fire",
+    "passives": [
+      {
+        "type": "Damage%",
+        "amount": "10"
+      }
+    ],
+    "basicAttack": {
+      "type": "normal",
+      "damage": "15",
+      "bonuses": []
+    },
+    "specialAttack": {
+      "type": "fire",
+      "damage": "25",
+      "bonuses": [
+        "Heal 15HP"
+      ]
+    },
+    "ultimateAttack": {
+      "type": "fire",
+      "damage": "50",
+      "bonuses": [
+        "Burn Enemy for 3 Damage/Turn"
+      ],
+      "matchRequirement": 88
+    },
+    "description": "A fire paladin",
+    "costs": [
+      {
+        "type": "wood",
+        "amount": "1500"
+      },
+      {
+        "type": "gold",
+        "amount": "3000"
+      }
+    ]
+  },
+  {
+    "name": "Ice Paladin",
+    "elementType": "ice",
+    "passives": [
+      {
+        "type": "Damage%",
+        "amount": "8"
+      }
+    ],
+    "basicAttack": {
+      "type": "normal",
+      "damage": "15",
+      "bonuses": []
+    },
+    "specialAttack": {
+      "type": "ice",
+      "damage": "25",
+      "bonuses": [
+        "Shield 10HP"
+      ]
+    },
+    "ultimateAttack": {
+      "type": "ice",
+      "damage": "50",
+      "bonuses": [],
+      "matchRequirement": 54
+    },
+    "description": "An ice paladin",
+    "costs": [
+      {
+        "type": "metal",
+        "amount": "1500"
+      },
+      {
+        "type": "gold",
+        "amount": "3000"
+      }
+    ]
+  }
+]

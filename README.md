@@ -1,54 +1,64 @@
-Match Up
+# Match Up
 
-Basic features
+## Concept
 
-Match 3 game with 6 different resources (including expansion possibility)
-Upgrade stuff with those different resources for bonuses.
+Match-3 game with heroes: You get a house/castle to build items in X by X grid. Those items have different tiers & bonuses (And maybe adjacency bonuses). Costs are spread between 6 currency items. To match-3, you need heroes. You will start the game with 1-4 heroes. They have special abilities,stats and matching techniques. The heroes go on an “Adventure” (Kind of a room-based design, where they fight and advance to the next room.). Each room/run has different bonuses & penalties. Depending on affinity the monsters and heroes have the element color highlights.  
+  
+## Castle:   
+Grid X by X, upgrade-able, exponentially expensive.
 
-Bonus 1
+Items that get placed:
+ - Wood bin  
+ - Stone bin  
+ - Food bin  
+ - Coin bin  
+ - Metal bin  
+ - Fire well  
+ - Electro well  
+ - Stone well  
+ - Water well  
+ - Ice well  
+ - Healing well  
+ - Darkness well  
 
-Story + Art - TBD
-There was always a thin line between the light and the dark. The balance is hardly maintained. Strange monsters have been appearing disturbing the balance and now the kingdom is in danger. Gather your forces and defeat the evil monsters. 
-The monsters are mythological creatures and each region has a different theme. 
 
-Bonus 2
+## Run:  
 
-Save progress via Google Play
+Map with all affinities as runs, but can choose only 3 at a time  
 
-Bonus 3
+Multiple rooms, goes to infinity OR Multiple run types (levels), goes to level X  
+ - Get bonuses per room?  
+ - Special events in rooms?  
+ - Mini boss(es) per run, gives bonus% resources  
+ - Penalties when abandoning fight   
+ - Clear dungeon -> find the exit  
 
-Introduce an energy system
 
-Bonus 4
+## Heroes:  
 
-Leaderboards
+Buy them from a shop, they reset after every run?  
+Gacha heroes to unlock?  
+Upgrade-able  
+Maybe have items?  
+ - Match 3 - Normal attack  
+ - Match 4 - Normal attack +Dmg  
+ - Match 5 - Speical attack  
+Ultimate bar  
+Elemental properties  
+Only 4 heroes allowed in a dungeon   
 
-Bonus 5
+Elements:  
+ - Fire - 2 heroes  
+ - Electro - 2 heroes  
+ - Stone - 2 heroes  
+ - Water - 2 heroes  
+ - Ice - 2 heroes  
+ - Healing - 2 heroes  
+ - Darkness - 1 hero  
+ - Normal - 3 heroes  
 
-Guilds - guild war? Exchange resources?
 
-Bonus 6
-
-Microtransactions
-
-Main screen - Button to “play”
-Upgrade screen - Show upgrades possible. (Do not show unobtainable upgrades yet).
-Show resource cost for each upgrade.
-Show bonuses it provides.
-Ability to click it and appear bigger for easier reading.
-Show already purchased buildings
-Show total bonuses
-Show total resources
-Play screen - Match 3 in AxB grid.
-With or without predefined starting state
-Finite turns
-Different goals
-Match 3
-Match 5
-Match 3x3
-Match 5x5
-Match 5x3
-Match 3x5
-Matches add to resources in level
-Not completing results in penalty to resources
-Guild screen - placeholder screen
+## Guild:  
+Buildings - Donate to guild for resources  
+Trade resources  
+Daily enemy -> get resources  

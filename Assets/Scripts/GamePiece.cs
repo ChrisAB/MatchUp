@@ -10,13 +10,25 @@ public class GamePiece : MonoBehaviour
   public int X
   {
     get { return x; }
-    set { if (IsMovable()) x = value; }
+    set
+    {
+      if (IsMovable())
+      {
+        x = value;
+      }
+    }
   }
 
   public int Y
   {
     get { return y; }
-    set { if (IsMovable()) y = value; }
+    set
+    {
+      if (IsMovable())
+      {
+        y = value;
+      }
+    }
   }
 
   private Grid.PieceType type;
@@ -40,17 +52,25 @@ public class GamePiece : MonoBehaviour
     get { return movableComponent; }
   }
 
-  private MaterialPiece materialComponent;
+  private ColorPiece colorComponent;
 
-  public MaterialPiece MaterialComponent
+  public ColorPiece ColorComponent
   {
-    get { return materialComponent; }
+    get { return colorComponent; }
+  }
+
+  private ClearablePiece clearableComponent;
+
+  public ClearablePiece ClearableComponent
+  {
+    get { return clearableComponent; }
   }
 
   void Awake()
   {
     movableComponent = GetComponent<MovablePiece>();
-    materialComponent = GetComponent<MaterialPiece>();
+    colorComponent = GetComponent<ColorPiece>();
+    clearableComponent = GetComponent<ClearablePiece>();
   }
 
   // Use this for initialization
@@ -73,13 +93,34 @@ public class GamePiece : MonoBehaviour
     type = _type;
   }
 
+  void OnMouseEnter()
+  {
+    grid.EnterPiece(this);
+  }
+
+  void OnMouseDown()
+  {
+    grid.PressPiece(this);
+  }
+
+  void OnMouseUp()
+  {
+    grid.ReleasePiece();
+  }
+
   public bool IsMovable()
   {
     return movableComponent != null;
   }
 
-  public bool IsMaterial()
+  public bool IsColored()
   {
-    return materialComponent != null;
+    return colorComponent != null;
+  }
+
+  public bool IsClearable()
+  {
+    return clearableComponent != null;
   }
 }
+
