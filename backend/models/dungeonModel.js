@@ -7,8 +7,7 @@ const dungeonSchema = new Schema({
   level: { type: Number },
   type: { type: String },
   size: { x: { type: Number }, y: { type: Number } },
-  rooms: [{ room: { type: ObjectId, ref: 'Room' }, position: { x: { type: Number }, y: { type: Number } } }],
-  loot: [{ type: { type: String }, amount: { type: Number } }],
+  rooms: [{ room: { type: ObjectId, ref: 'Room' }, loot: { type: { type: String }, amount: { type: Number } }, position: { x: { type: Number }, y: { type: Number } } }],
   active: { type: Boolean, default: true }
 });
 
