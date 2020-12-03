@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const itemSchema = new Schema({
   name: { type: String },
   bonuses: [{ bonusType: { type: String }, bonusAmount: { type: Number } }],
-  cost: [{ costType: { type: String }, costAmount: { type: Number } }],
+  costs: [{ costType: { type: String }, costAmount: { type: Number } }],
   size: [{ x: { type: Number }, y: { type: Number } }],
   enabled: { type: Boolean, default: true }
 });
