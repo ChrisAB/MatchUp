@@ -7,7 +7,7 @@ const bannerSchema = new Schema({
   heroes: [{ type: ObjectId, ref: 'Hero' }],
   odds: [{ type: Number }],
   costs: [{ currencyType: { type: String }, currencyAmount: { type: Number } }],
-  enabled: { type: Boolean, default: true }
+  enabled: { type: Boolean, default: false }
 });
 
 const Banner = mongoose.model("Banner", bannerSchema);
