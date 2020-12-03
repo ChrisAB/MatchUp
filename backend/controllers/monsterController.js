@@ -16,7 +16,7 @@ exports.getMonster = catchAsync(async (req, res, next) => {
 });
 
 exports.createMonster = catchAsync(async (req, res, next) => {
-  const { name, type, elementType, healthPoints, passives, basicAttack, specialAttack, ultimateAttack, description } = req.body;
+  const { name, type, elementType, healthPoints, passives, basicAttack, specialAttack, ultimateAttack, description, enabled } = req.body;
   const monster = await Monster.create({
     name,
     type,
@@ -26,7 +26,8 @@ exports.createMonster = catchAsync(async (req, res, next) => {
     basicAttack,
     specialAttack,
     ultimateAttack,
-    description
+    description,
+    enabled: enabled != undefined ? enabled : false
   })
   res.status(200).json({ status: 'success', data: { monster } });
 });
