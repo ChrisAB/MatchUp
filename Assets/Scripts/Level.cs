@@ -49,9 +49,9 @@ public class Level : MonoBehaviour
   }
 
   public virtual void OnMove()
-  {
+  {/*
     for (int i = 0; i < monsters.Count; i++)
-      monsters[i].DoDamage(heroes);
+      monsters[i].DoDamage(heroes);*/
   }
 
   public virtual void OnPiecesMatch(List<GamePiece> pieces)

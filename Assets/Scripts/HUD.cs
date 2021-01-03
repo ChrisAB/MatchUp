@@ -32,7 +32,7 @@ public class HUD : MonoBehaviour
 
   public void SetHeroes(List<Hero> heroes)
   {
-
+    
   }
 
   public void SetMonsters(List<Monster> monsters)
