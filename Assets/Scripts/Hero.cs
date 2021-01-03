@@ -15,7 +15,23 @@ public class Hero : MonoBehaviour
         set { SetHealthPoints(value); }
     }
 
-    
+    public int MaxHealthPoints {
+        get { return maxHealthPoints; }
+        set { SetMaxHealthPoints(value); }
+    }
+
+    private HeroTypes heroComponent;
+
+    public HeroTypes HeroComponent
+    {
+        get { return heroComponent; }
+    }
+
+    void Awake(){
+    heroComponent = GetComponent<HeroTypes>();
+   }
+
+   
 
     // Start is called before the first frame update
     void Start()
@@ -31,5 +47,9 @@ public class Hero : MonoBehaviour
 
     void SetHealthPoints(int value) {
         healthPoints = value;
+
+    }
+    void SetMaxHealthPoints(int value){
+        maxHealthPoints = heroComponent.MaxHP;
     }
 }

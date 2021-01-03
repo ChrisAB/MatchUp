@@ -20,6 +20,8 @@ public class Level : MonoBehaviour
 
   protected LevelType type;
 
+  //public Hero heroPrefab;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -58,5 +60,16 @@ public class Level : MonoBehaviour
   {
     //Remove HP Of Monster
     //Remove HP Of Player if Monser attacks
+  }
+
+  public Hero spawnHero()
+  {
+    GameObject newHero = (GameObject)Instantiate( Quaternion.identity);
+    newPiece.transform.parent = transform;
+    
+    auxHero = newHero.GetComponent<Hero>();
+    heroes.add(auxHero);
+
+    return auxHero;
   }
 }
