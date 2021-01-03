@@ -45,10 +45,10 @@ public class Grid : MonoBehaviour
   // Use this for initialization
   void Awake()
   {
-    PlayGamesPlatform.Instance.Authenticate(SignInInteractivity.CanPromptAlways, (result) =>{
+    /*PlayGamesPlatform.Instance.Authenticate(SignInInteractivity.CanPromptAlways, (result) =>{
         Debug.Log("I was here");
         Debug.Log(result);
-    });
+    });*/
 
     piecePrefabDict = new Dictionary<PieceType, GameObject>();
 
