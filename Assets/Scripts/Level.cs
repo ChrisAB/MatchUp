@@ -61,7 +61,7 @@ public class Level : MonoBehaviour
     //Remove HP Of Monster
     //Remove HP Of Player if Monser attacks
   }
-
+  /*
   public Hero spawnHero()
   {
     GameObject newHero = (GameObject)Instantiate( Quaternion.identity);
@@ -71,5 +71,5 @@ public class Level : MonoBehaviour
     heroes.add(auxHero);
 
     return auxHero;
-  }
+  }*/
 }

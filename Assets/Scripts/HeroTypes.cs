@@ -155,4 +155,15 @@ public class HeroTypes : MonoBehaviour
 			sprite.sprite = heroTypeSpriteDict [newHeroDetails];
 		}
 	}
+
+    public void Init(HeroType nheroType, PowerType npowerType, string nname, int nmaxHealthPoints){
+        newHeroDetailsAux.HT = nheroType;
+        newHeroDetailsAux.PT = npowerType;
+        newHeroDetailsAux.Name = nname;
+        newHeroDetailsAux.MHP = nmaxHealthPoints;
+    }
+
+    public HeroDtails HeroDetailsAux{
+        get {return newHeroDetailsAux;}
+    }
 }
