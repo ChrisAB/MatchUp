@@ -1005,6 +1005,8 @@ MonoBehaviour:
   Heroes: {fileID: 899146240}
   Monsters: {fileID: 2111650417}
   RemainingTimeOrMoves: {fileID: 1478168652}
+  heroPrefab: {fileID: 8901155073268197351, guid: 02eee4c574477db42bed507a0e4dccc6,
+    type: 3}
 --- !u!1 &642866647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2066,6 +2068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 868545080}
   hud: {fileID: 630384796}
+  heroPrefab: {fileID: 0}
 --- !u!4 &1481945732
 Transform:
   m_ObjectHideFlags: 0

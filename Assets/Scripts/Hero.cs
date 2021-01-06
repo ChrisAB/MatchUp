@@ -8,7 +8,7 @@ public class Hero : MonoBehaviour
     private int maxHealthPoints;
     private int ultimateBarCharge;
     private int ultimateRequirement;
-    private int name;
+    private GameObject heroPrefab;
 
     public int HealthPoints {
         get { return healthPoints; }
@@ -51,5 +51,8 @@ public class Hero : MonoBehaviour
     }
     void SetMaxHealthPoints(int value){
         maxHealthPoints = heroComponent.MaxHP;
+    }
+    public void Init(GameObject heroprefab){
+        heroPrefab=heroprefab;
     }
 }

@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Darkness-Tile
+  - Fire-Tile
+  - Electro-Tile
+  - Ice-Tile
+  - Normal-Tile
+  - Stone-Tile
+  - Water-Tile
   layers:
   - Default
   - TransparentFX

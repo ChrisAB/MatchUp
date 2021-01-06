@@ -17,6 +17,7 @@ public class Level : MonoBehaviour
 
   protected List<Monster> monsters;
   protected List<Hero> heroes;
+  public GameObject heroPrefab;
 
   protected LevelType type;
 

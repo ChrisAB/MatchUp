@@ -10,8 +10,10 @@ public class HUD : MonoBehaviour
   public GameObject Heroes;
   public GameObject Monsters;
   public GameObject RemainingTimeOrMoves;
+  public GameObject heroPrefab;
   private TextMeshPro remainingText;
   private TextMeshPro remainingSubtext;
+  
 
   private bool isGameOver = false;
 
@@ -32,7 +34,12 @@ public class HUD : MonoBehaviour
 
   public void SetHeroes(List<Hero> heroes)
   {
-    
+    //Instantiate(heroPrefab,Quaternion.identity);
+    foreach (Transform hero in Heroes.transform)
+    {
+      Debug.Log("hero");
+      //Debug.Log(Generatehero());
+    }
   }
 
   public void SetMonsters(List<Monster> monsters)
@@ -52,7 +59,7 @@ public class HUD : MonoBehaviour
   {
     foreach (Transform monster in Monsters.transform)
     {
-      Debug.Log(monster);
+      Debug.Log("hero here");
     }
   }
 
@@ -91,5 +98,11 @@ public class HUD : MonoBehaviour
   public void OnGameLose()
   {
     isGameOver = true;
+  }
+
+  public HeroTypes Generatehero(){
+    GameObject newheroPrefab = Instantiate( heroPrefab ) as GameObject;
+    HeroTypes controller = newheroPrefab.GetComponent<HeroTypes>();
+    return controller;
   }
 }

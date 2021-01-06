@@ -126,6 +126,11 @@
      <Compile Include="Assets\Scripts\MaterialPiece.cs" />
      <Compile Include="Assets\Scripts\Monster.cs" />
      <Compile Include="Assets\Scripts\MovablePiece.cs" />
+     <Compile Include="Assets\Scripts\tries\BackgroundTile.cs" />
+     <Compile Include="Assets\Scripts\tries\Board.cs" />
+     <Compile Include="Assets\Scripts\tries\HeroBoard.cs" />
+     <Compile Include="Assets\Scripts\tries\HeroTile.cs" />
+     <Compile Include="Assets\Scripts\tries\Tile.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
