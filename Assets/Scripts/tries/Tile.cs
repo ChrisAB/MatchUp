@@ -47,7 +47,7 @@ public class Tile : MonoBehaviour
     private void OnMouseOver(){
         if(Input.GetMouseButtonDown(1)){
             isColBomb = true;
-            GameObject arrow = Instantiate(colArrow, transform.position, Quaternion.identity);
+            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
             arrow.transform.parent = this.transform;
         }
     }

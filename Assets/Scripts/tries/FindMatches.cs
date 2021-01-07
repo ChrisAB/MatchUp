@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 public class FindMatches : MonoBehaviour
 {
@@ -28,6 +30,11 @@ public class FindMatches : MonoBehaviour
                         GameObject rightTile = board.allGeneratedTiles[i+1,j];
                         if(leftTile!=null && rightTile!=null){
                             if(leftTile.tag == currentTile.tag && rightTile.tag == currentTile.tag){
+                                if(currentTile.GetComponent<Tile>().isRowBomb ||
+                                    leftTile.GetComponent<Tile>().isRowBomb ||
+                                    rightTile.GetComponent<Tile>().isRowBomb){
+                                        currentMatches.Union(GetRowPieces(j));
+                                    } 
                                 if(!currentMatches.Contains(leftTile)){
                                     currentMatches.Add(leftTile);
                                 }
@@ -67,5 +74,27 @@ public class FindMatches : MonoBehaviour
                 }
             }
         }
+    }
+
+    List<GameObject> GetColumnPieces(int column){
+        List<GameObject> tiles = new List<GameObject>();
+        for (int i = 0; i< board.height; i++){
+            if(board.allGeneratedTiles[column,i]!=null){
+                tiles.Add(board.allGeneratedTiles[column,i]);
+                board.allGeneratedTiles[column,i].GetComponent<Tile>().isMatched= true;
+            }
+        }
+        return tiles;
+    }
+
+     List<GameObject> GetRowPieces(int row){
+        List<GameObject> tiles = new List<GameObject>();
+        for (int i = 0; i< board.width; i++){
+            if(board.allGeneratedTiles[i,row]!=null){
+                tiles.Add(board.allGeneratedTiles[i,row]);
+                board.allGeneratedTiles[i,row].GetComponent<Tile>().isMatched= true;
+            }
+        }
+        return tiles;
     }
 }
