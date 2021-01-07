@@ -84,7 +84,7 @@ public class MonsterBoard : MonoBehaviour
         numberOfMonstersKilled++;
         Destroy(allGeneratedMonsters[i]);
         usedIndexes.Remove(i);
-        Vector2 tempPosition = new Vector2((i - 0.5f) * 2.5f, -2);
+        Vector2 tempPosition = new Vector2((i - 0.5f) * 2.5f, 12);
 
         int monsterToUse = getMonsterIndex();
 

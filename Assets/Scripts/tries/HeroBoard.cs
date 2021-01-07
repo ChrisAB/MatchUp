@@ -113,10 +113,25 @@ public class HeroBoard : MonoBehaviour
         return totalDamage;
     }
 
+    public void TakeDamage(int damageToTake) {
+        foreach (HeroTile hero in allHeroes)
+        {
+            hero.TakeDamage(damageToTake/3);
+        }
+    }
+
     public void HealAll(int howMuchToHeal) {
         foreach (HeroTile hero in allHeroes)
         { 
           hero.RegenerateHP(howMuchToHeal);  
         }
+    }
+
+    public bool AreAllAlive() {
+        foreach (HeroTile hero in allHeroes)
+        {
+            if(hero.IsAlive()) return true;
+        }
+        return false;
     }
 }

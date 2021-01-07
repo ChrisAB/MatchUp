@@ -48,7 +48,11 @@ public class HeroTile : MonoBehaviour
     }
 
     public void LoseHP(int HPToLose) {
-        maxHP -= HPToLose;
+        HP -= HPToLose;
+    }
+
+    public void TakeDamage(int damageToTake) {
+        HP -= damageToTake;
     }
 
     public void RegenerateHP(int HPToRegenerate) {

@@ -9,6 +9,7 @@ public enum GameState{
 
 public class Board : MonoBehaviour
 {
+    public GameManager GameManager;
     public GameState currentState = GameState.MOVE;
     private FindMatches findMatches;
     public int width;
@@ -29,6 +30,7 @@ public class Board : MonoBehaviour
         findMatches = FindObjectOfType<FindMatches>();
         heroBoard = FindObjectOfType<HeroBoard>();
         monsterBoard = FindObjectOfType<MonsterBoard>();
+        GameManager = FindObjectOfType<GameManager>();
         SetUp();
     }
 
@@ -130,6 +132,10 @@ public class Board : MonoBehaviour
             var damage = heroBoard.CalculateTotalDamage();
             monsterBoard.TakeDamage(SumDamageTypes(damage));
             int monstersKilled = monsterBoard.KillAndRespawnMonsters();
+            heroBoard.TakeDamage(25);
+            if(!heroBoard.AreAllAlive()) {
+                GameManager.LoseGame();
+            }
             if(monstersKilled > 0) {
                 heroBoard.HealAll(10 * monstersKilled);
             }
