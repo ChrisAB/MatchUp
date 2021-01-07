@@ -96,7 +96,7 @@ public class Board : MonoBehaviour
 
     private void DestroyMatchesAt(int col, int row){
         if (allGeneratedTiles[col,row].GetComponent<Tile>().isMatched){
-            heroBoard.AccumulateDamage(allGeneratedTiles[col,row]);
+            //heroBoard.AccumulateDamage(allGeneratedTiles[col,row]);
             findMatches.currentMatches.Remove(allGeneratedTiles[col,row]);
             Destroy(allGeneratedTiles[col,row]);
             allGeneratedTiles[col,row] = null;

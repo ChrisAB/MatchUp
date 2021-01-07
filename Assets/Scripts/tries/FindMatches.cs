@@ -34,6 +34,7 @@ public class FindMatches : MonoBehaviour
                                     leftTile.GetComponent<Tile>().isRowBomb ||
                                     rightTile.GetComponent<Tile>().isRowBomb){
                                         currentMatches.Union(GetRowPieces(j));
+                                        
                                     } 
                                 if(!currentMatches.Contains(leftTile)){
                                     currentMatches.Add(leftTile);
