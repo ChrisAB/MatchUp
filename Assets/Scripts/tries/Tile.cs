@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour
     public bool isMatched = false;
 
     private GameObject otherTile;
+    private FindMatches findMatches;
     private Board board;
     private Vector2 firstTouchPosition;
     private Vector2 finalTouchPosition;
@@ -23,18 +24,21 @@ public class Tile : MonoBehaviour
     void Start()
     {
         board = FindObjectOfType<Board>();
+        findMatches = FindObjectOfType<FindMatches>();
+        /*
         targetX = (int)transform.position.x;
         targetY = (int)transform.position.y;
+        
         row=targetY;
         col=targetX;
         previousColumn=col;
-        previousRow=row;
+        previousRow=row;*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        FindMatches();
+        //FindMatches();
         /*
         if (isMatched==true){
             SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
@@ -50,6 +54,7 @@ public class Tile : MonoBehaviour
                 if (board.allGeneratedTiles[col,row]!= this.gameObject){
                     board.allGeneratedTiles[col,row] = this.gameObject;
                 }
+                findMatches.FindAllMatches();
             }else{
                 //Directly set position
                 tempPosition = new Vector2(targetX,transform.position.y);
@@ -63,6 +68,7 @@ public class Tile : MonoBehaviour
                  if (board.allGeneratedTiles[col,row]!= this.gameObject){
                     board.allGeneratedTiles[col,row] = this.gameObject;
                 }
+                findMatches.FindAllMatches();
             }else{
                 //Directly set position
                 tempPosition = new Vector2(transform.position.x, targetY);
@@ -81,6 +87,8 @@ public class Tile : MonoBehaviour
                 otherTile.GetComponent<Tile>().col = col;
                 row = previousRow;
                 col = previousColumn;
+                yield return new WaitForSeconds(.5f);
+                board.currentState = GameState.MOVE;
             }else{
                 board.DestroyMatches();
             }
@@ -89,13 +97,17 @@ public class Tile : MonoBehaviour
     }
 
     private void OnMouseDown(){ //presed
-        firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if(board.currentState == GameState.MOVE){
+            firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
 
     }
 
     private void OnMouseUp(){ //released
-        finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        CalculateAngle();
+        if(board.currentState == GameState.MOVE){
+            finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            CalculateAngle();
+        }
     }
 
     void CalculateAngle(){
@@ -105,12 +117,18 @@ public class Tile : MonoBehaviour
             //Debug.Log(swipeAngle);
             try {
                 MovePieces();
+                board.currentState = GameState.WAIT;
             }catch(System.IndexOutOfRangeException e){
                 Debug.Log ("Out of range happened");
             }
+        }else {
+            board.currentState = GameState.MOVE;
         }
     }
     void MovePieces(){
+        previousColumn=col;
+        previousRow=row;
+
         if(swipeAngle > -45 && swipeAngle <= 45 && col<board.width-1){ // Right
             otherTile = board.allGeneratedTiles[col +1, row];
             otherTile.GetComponent<Tile>().col -=1;

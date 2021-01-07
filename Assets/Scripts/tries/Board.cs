@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState{
+    WAIT,
+    MOVE
+}
+
 public class Board : MonoBehaviour
 {
+    public GameState currentState = GameState.MOVE;
+    private FindMatches findMatches;
     public int width;
     public int height;
+    public int offSet;
     public GameObject tilePrefab;
     public GameObject[] tiles;
     public GameObject[,] allGeneratedTiles;
@@ -15,6 +23,7 @@ public class Board : MonoBehaviour
     {
         allTiles = new BackgroundTile[width, height];
         allGeneratedTiles = new GameObject[width,height];
+        findMatches = FindObjectOfType<FindMatches>();
         SetUp();
     }
 
@@ -28,9 +37,10 @@ public class Board : MonoBehaviour
     {
         for (int i=0; i< width; i++)
             for (int j =0; j<height; j++){
-                Vector2 tempPosition = new Vector2(i,j);
+                Vector2 tempPosition = new Vector2(i, j + offSet);
                 //what we instantiate, position , rotation
-                GameObject backgroundTile = Instantiate(tilePrefab, tempPosition, Quaternion.identity) as GameObject;
+                Vector2 bgTiletempPosition = new Vector2(i, j);
+                GameObject backgroundTile = Instantiate(tilePrefab, bgTiletempPosition, Quaternion.identity) as GameObject;
                 backgroundTile.transform.parent = this.transform; //change parent to board
                 backgroundTile.name = "BG:(" + i + ","+ j + ")";
             
@@ -45,6 +55,8 @@ public class Board : MonoBehaviour
 
                 // tile prefab from array , where the background tile is 
                 GameObject tile = Instantiate(tiles[tileToUse], tempPosition, Quaternion.identity);
+                tile.GetComponent<Tile>().row = j;
+                tile.GetComponent<Tile>().col = i;
                 tile.transform.parent = this.transform; // tile child of background tile
                 tile.name = "(" + i + ","+ j + ")";
 
@@ -82,6 +94,7 @@ public class Board : MonoBehaviour
 
     private void DestroyMatchesAt(int col, int row){
         if (allGeneratedTiles[col,row].GetComponent<Tile>().isMatched){
+            findMatches.currentMatches.Remove(allGeneratedTiles[col,row]);
             Destroy(allGeneratedTiles[col,row]);
             allGeneratedTiles[col,row] = null;
         }
@@ -124,10 +137,50 @@ public class Board : MonoBehaviour
             }
             nullCount = 0;
         }
-        yield return new WaitForSeconds(.6f);
+        yield return new WaitForSeconds(.3f);
+        StartCoroutine(FillBoardCo());
         
     }
 
-    
+    private void RefillBoard(){
+        for (int i = 0; i < width; i ++){
+            for (int j = 0; j < height; j ++){
+                if (allGeneratedTiles[i,j] == null){
+                    Vector2 tempPosition = new Vector2(i,j+offSet);
+                    int tileToUse = Random.Range(0,tiles.Length);
+                    GameObject piece = Instantiate(tiles[tileToUse], tempPosition, Quaternion.identity);
+                    allGeneratedTiles[i,j] = piece;
+                    piece.GetComponent<Tile>().row = j;
+                    piece.GetComponent<Tile>().col = i;
+                }
+            }
+        }
+    }
+
+    private bool MatchesOnBoard(){
+        for (int i = 0; i < width; i ++){
+            for (int j = 0; j < height; j ++){
+                if (allGeneratedTiles[i,j] != null){
+                    if(allGeneratedTiles[i,j].GetComponent<Tile>().isMatched){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private IEnumerator FillBoardCo(){
+        RefillBoard();
+        yield return new  WaitForSeconds(.5f);
+        while(MatchesOnBoard()){
+            yield return new WaitForSeconds(.0f);
+            DestroyMatches();
+        }
+        yield return new WaitForSeconds(.5f);
+        currentState=GameState.MOVE;
+    }
+
+
 
 }

@@ -128,6 +128,7 @@
      <Compile Include="Assets\Scripts\MovablePiece.cs" />
      <Compile Include="Assets\Scripts\tries\BackgroundTile.cs" />
      <Compile Include="Assets\Scripts\tries\Board.cs" />
+     <Compile Include="Assets\Scripts\tries\FindMatches.cs" />
      <Compile Include="Assets\Scripts\tries\HeroBoard.cs" />
      <Compile Include="Assets\Scripts\tries\HeroTile.cs" />
      <Compile Include="Assets\Scripts\tries\Tile.cs" />
