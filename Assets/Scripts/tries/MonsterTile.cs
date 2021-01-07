@@ -28,6 +28,7 @@ public class MonsterTile : MonoBehaviour
   public void TakeDamage(int damagaToTake)
   {
     HP -= damagaToTake;
+    Debug.Log("I have " + HP.ToString() + " HP left");
   }
 
   public bool IsAlive()

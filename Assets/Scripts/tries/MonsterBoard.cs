@@ -74,6 +74,32 @@ public class MonsterBoard : MonoBehaviour
     }
   }
 
+  public int KillAndRespawnMonsters()
+  {
+    int numberOfMonstersKilled = 0;
+    for (int i = 0; i < allMonsters.Length; i++)
+    {
+      if (!allMonsters[i].IsAlive())
+      {
+        numberOfMonstersKilled++;
+        Destroy(allGeneratedMonsters[i]);
+        usedIndexes.Remove(i);
+        Vector2 tempPosition = new Vector2((i - 0.5f) * 2.5f, -2);
+
+        int monsterToUse = getMonsterIndex();
+
+        // tile prefab from array , where the background tile is 
+        GameObject monsterTile = Instantiate(monsters[monsterToUse], tempPosition, Quaternion.identity);
+        monsterTile.transform.parent = this.transform; // tile child of background tile
+        monsterTile.name = "Monster" + i;
+
+        allGeneratedMonsters[i] = monsterTile;
+        allMonsters[i] = monsterTile.GetComponent<MonsterTile>();
+      }
+    }
+    return numberOfMonstersKilled;
+  }
+
   public int getTurnDamage()
   {
     int totalDamage = 0;

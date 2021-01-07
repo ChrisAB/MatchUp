@@ -67,6 +67,4 @@ public class HeroTile : MonoBehaviour
     public void UseUltimate() {
         MP = 0;
     }
-
-
 }

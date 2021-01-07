@@ -105,6 +105,7 @@ public class Board : MonoBehaviour
                 findMatches.currentMatches.Count == 7){
                     findMatches.CheckBombs();
             }
+
             findMatches.currentMatches.Remove(allGeneratedTiles[col,row]);
             Destroy(allGeneratedTiles[col,row]);
             allGeneratedTiles[col,row] = null;
@@ -128,6 +129,10 @@ public class Board : MonoBehaviour
         if(numberOfPiecesDestroyed >= 3) {
             var damage = heroBoard.CalculateTotalDamage();
             monsterBoard.TakeDamage(SumDamageTypes(damage));
+            int monstersKilled = monsterBoard.KillAndRespawnMonsters();
+            if(monstersKilled > 0) {
+                heroBoard.HealAll(10 * monstersKilled);
+            }
         }
         StartCoroutine(DecreaseRowCo());
     }

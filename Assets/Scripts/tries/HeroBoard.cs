@@ -86,9 +86,9 @@ public class HeroBoard : MonoBehaviour
         foreach (HeroTile item in allHeroes)
         {
             if(item.heroType == type) {
-                damage += numberOfMatches[type] * 2;
+                damage += numberOfMatches[type] * 2 * 5;
             } else if(item.heroType == HeroType.NORMAL) {
-                damage += numberOfMatches[type];
+                damage += numberOfMatches[type] * 5;
             }
         }
         return damage;
@@ -111,5 +111,12 @@ public class HeroBoard : MonoBehaviour
             numberOfMatches[item] = 0;
         }
         return totalDamage;
+    }
+
+    public void HealAll(int howMuchToHeal) {
+        foreach (HeroTile hero in allHeroes)
+        { 
+          hero.RegenerateHP(howMuchToHeal);  
+        }
     }
 }
