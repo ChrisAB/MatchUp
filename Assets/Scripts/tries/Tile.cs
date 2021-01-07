@@ -7,12 +7,13 @@ public class Tile : MonoBehaviour
     //In case that tiles aren't correct indexes check for board to be at 0 0 0
     // Start is called before the first frame update
     [Header("Board variables")]
-    public int col, row;
+    public int col;
+    public int  row;
     public int previousColumn, previousRow;
     public int targetX, targetY;
     public bool isMatched = false;
 
-    private GameObject otherTile;
+    public GameObject otherTile;
     private FindMatches findMatches;
     private Board board;
     private Vector2 firstTouchPosition;
@@ -23,7 +24,8 @@ public class Tile : MonoBehaviour
     public float swipeMax = 2f;
 
     [Header("PwerUp")]
-    public bool isColBomb, isRowBomb;
+    public bool isColBomb; 
+    public bool isRowBomb;
     public GameObject rowArrow, colArrow;
 
     void Start()
@@ -46,7 +48,7 @@ public class Tile : MonoBehaviour
     //Debug
     private void OnMouseOver(){
         if(Input.GetMouseButtonDown(1)){
-            isColBomb = true;
+            isRowBomb = true;
             GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
             arrow.transform.parent = this.transform;
         }
@@ -56,11 +58,11 @@ public class Tile : MonoBehaviour
     void Update()
     {
         //FindMatches();
-        
+        /*
         if (isMatched==true){
             SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
             mySprite.color = new Color(102,45,145,.2f);
-        }
+        }*/
         targetX=col;
         targetY=row;
         try{
@@ -105,11 +107,12 @@ public class Tile : MonoBehaviour
                 row = previousRow;
                 col = previousColumn;
                 yield return new WaitForSeconds(.5f);
+                board.currentTile = null;
                 board.currentState = GameState.MOVE;
             }else{
                 board.DestroyMatches();
             }
-            otherTile = null;
+            //otherTile = null;
         }
     }
 
@@ -129,12 +132,13 @@ public class Tile : MonoBehaviour
 
     void CalculateAngle(){
         if (Mathf.Abs(finalTouchPosition.y-firstTouchPosition.y) > swipeResist || 
-            Mathf.Abs(finalTouchPosition.x-firstTouchPosition.x) > swipeResist )            {
+            Mathf.Abs(finalTouchPosition.x-firstTouchPosition.x) > swipeResist ){
             swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x ) * 180/Mathf.PI;
             //Debug.Log(swipeAngle);
             try {
                 MovePieces();
                 board.currentState = GameState.WAIT;
+                board.currentTile = this;
             }catch(System.IndexOutOfRangeException e){
                 Debug.Log ("Out of range happened");
             }
@@ -210,6 +214,18 @@ public class Tile : MonoBehaviour
             default:
                 return HeroType.NORMAL;
         }
+    }
+
+    public void MakeRowBomb(){
+        isRowBomb = true;
+        GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
+        arrow.transform.parent = this.transform;
+    }
+
+    public void MakeColumnBomb(){
+        isColBomb = true;
+        GameObject arrow = Instantiate(colArrow, transform.position, Quaternion.identity);
+        arrow.transform.parent = this.transform;
     }
 
 }

@@ -30,12 +30,26 @@ public class FindMatches : MonoBehaviour
                         GameObject rightTile = board.allGeneratedTiles[i+1,j];
                         if(leftTile!=null && rightTile!=null){
                             if(leftTile.tag == currentTile.tag && rightTile.tag == currentTile.tag){
+                                //COULMN BOMB
+                                if(currentTile.GetComponent<Tile>().isColBomb){
+                                        currentMatches.Union(GetColumnPieces(i));
+                                        //Debug.Log("Gets Here");
+                                }else if(leftTile.GetComponent<Tile>().isColBomb){
+                                        currentMatches.Union(GetColumnPieces(i-1));
+                                        //Debug.Log("Gets Here");
+                                }else if(rightTile.GetComponent<Tile>().isColBomb){
+                                        currentMatches.Union(GetColumnPieces(i+1));
+                                        //Debug.Log("Gets Here");
+                                } 
+                                //ROW BOMB
                                 if(currentTile.GetComponent<Tile>().isRowBomb ||
                                     leftTile.GetComponent<Tile>().isRowBomb ||
                                     rightTile.GetComponent<Tile>().isRowBomb){
                                         currentMatches.Union(GetRowPieces(j));
-                                        
-                                    } 
+                                        Debug.Log("Gets Here");
+                                    }
+
+                                //ADD TO CURRENT MATCHES 
                                 if(!currentMatches.Contains(leftTile)){
                                     currentMatches.Add(leftTile);
                                 }
@@ -57,6 +71,25 @@ public class FindMatches : MonoBehaviour
                         GameObject downTile = board.allGeneratedTiles[i,j-1];
                         if(upTile!=null && downTile!=null){
                             if(upTile.tag == currentTile.tag && downTile.tag == currentTile.tag){
+                                //COLUMNBOMB
+                                if(currentTile.GetComponent<Tile>().isColBomb ||
+                                    upTile.GetComponent<Tile>().isColBomb ||
+                                    downTile.GetComponent<Tile>().isColBomb){
+                                        currentMatches.Union(GetColumnPieces(i));
+                                        //Debug.Log("Gets Here");
+                                } 
+                                //ROW BOMB
+                                if(currentTile.GetComponent<Tile>().isRowBomb){
+                                        currentMatches.Union(GetRowPieces(j));
+                                        //Debug.Log("Gets Here");
+                                }else if(upTile.GetComponent<Tile>().isRowBomb){
+                                        currentMatches.Union(GetRowPieces(j+1));
+                                        //Debug.Log("Gets Here");
+                                }else if(downTile.GetComponent<Tile>().isRowBomb){
+                                        currentMatches.Union(GetRowPieces(j-1));
+                                        //Debug.Log("Gets Here");
+                                } 
+                                //ADD TO CURRENT  MATCHES
                                 if(!currentMatches.Contains(upTile)){
                                     currentMatches.Add(upTile);
                                 }
@@ -88,7 +121,7 @@ public class FindMatches : MonoBehaviour
         return tiles;
     }
 
-     List<GameObject> GetRowPieces(int row){
+    List<GameObject> GetRowPieces(int row){
         List<GameObject> tiles = new List<GameObject>();
         for (int i = 0; i< board.width; i++){
             if(board.allGeneratedTiles[i,row]!=null){
@@ -98,4 +131,56 @@ public class FindMatches : MonoBehaviour
         }
         return tiles;
     }
+
+    public void CheckBombs(){
+        if (board.currentTile != null){
+            //Is matched
+            if(board.currentTile.isMatched){
+                board.currentTile.isMatched=false;
+                if( (board.currentTile.swipeAngle>-45 && board.currentTile.swipeAngle <=45) ||
+                    (board.currentTile.swipeAngle >= 135 || board.currentTile.swipeAngle <-135)){
+                        board.currentTile.MakeRowBomb();
+                }else {
+                        board.currentTile.MakeColumnBomb();
+                }                    
+                /*
+                int typeBomb = Random.Range(0,100);
+                if(typeBomb<50){
+                    //ROW
+                    board.currentTile.MakeRowBomb();
+                }else if(typeBomb>=50){
+                    //COLUMN
+                    board.currentTile.MakeColumnBomb();
+                }
+                */
+
+            }else if (board.currentTile.otherTile != null){
+                //is other piece matched
+                Tile otherTile = board.currentTile.otherTile.GetComponent<Tile>();
+                if(otherTile.isMatched){
+                    otherTile.isMatched=false;
+                    if( (board.currentTile.swipeAngle>-45 && board.currentTile.swipeAngle <=45) ||
+                    (board.currentTile.swipeAngle >= 135 || board.currentTile.swipeAngle <-135)){
+                        otherTile.MakeRowBomb();
+                    }else {
+                        otherTile.MakeColumnBomb();
+                    }                 
+                    /*
+                    int typeBomb = Random.Range(0,100);
+                    if(typeBomb<50){
+                        //ROW
+                        otherTile.MakeRowBomb();
+                    }else if(typeBomb>=50){
+                        //COLUMN
+                        otherTile.MakeColumnBomb();
+                    }
+                    */
+                }
+
+            }
+            
+            
+        }
+    }
+
 }
