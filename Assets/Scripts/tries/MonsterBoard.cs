@@ -30,7 +30,7 @@ public class MonsterBoard : MonoBehaviour
   {
     for (int i = 0; i < width; i++)
     {
-      Vector2 tempPosition = new Vector2((i - 0.5f) * 2.5f, -2);
+      Vector2 tempPosition = new Vector2((i - 0.5f) * 2.5f, 12);
       //what we instantiate, position , rotation
       GameObject backgroundTile = Instantiate(monsterPrefab, tempPosition, Quaternion.identity) as GameObject;
       backgroundTile.transform.parent = this.transform; //change parent to board
