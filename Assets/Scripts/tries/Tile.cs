@@ -7,7 +7,8 @@ public class Tile : MonoBehaviour
     //In case that tiles aren't correct indexes check for board to be at 0 0 0
     // Start is called before the first frame update
     [Header("Board variables")]
-    public int col, row;
+    public int col;
+    public int  row;
     public int previousColumn, previousRow;
     public int targetX, targetY;
     public bool isMatched = false;

@@ -149,9 +149,12 @@ public class Board : MonoBehaviour
                     Vector2 tempPosition = new Vector2(i,j+offSet);
                     int tileToUse = Random.Range(0,tiles.Length);
                     GameObject piece = Instantiate(tiles[tileToUse], tempPosition, Quaternion.identity);
+                    piece.transform.parent = this.transform; // tile child of background tile
+                    
                     allGeneratedTiles[i,j] = piece;
                     piece.GetComponent<Tile>().row = j;
                     piece.GetComponent<Tile>().col = i;
+                    piece.GetComponent<Tile>().name = "(" + i + ","+ j + ")";
                 }
             }
         }
