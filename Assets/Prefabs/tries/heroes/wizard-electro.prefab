@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6741296024983368588}
   - component: {fileID: 6179991749766056663}
+  - component: {fileID: 7716040519146647701}
   m_Layer: 0
   m_Name: wizard-electro
   m_TagString: Untagged
@@ -113,6 +114,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7716040519146647701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4869250145201175165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9381d6e7b134c4394bbf72facc134c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroType: 5
 --- !u!1 &7868335978918052187
 GameObject:
   m_ObjectHideFlags: 0

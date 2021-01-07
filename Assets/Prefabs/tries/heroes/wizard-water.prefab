@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8787246628878303437}
   - component: {fileID: 9100707773407908677}
+  - component: {fileID: 6572033097240244400}
   m_Layer: 0
   m_Name: wizard-water
   m_TagString: Untagged
@@ -113,6 +114,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6572033097240244400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8624587472988250316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9381d6e7b134c4394bbf72facc134c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroType: 1
 --- !u!1 &8867784773712648387
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,12 +18,14 @@ public class Board : MonoBehaviour
     public GameObject[] tiles;
     public GameObject[,] allGeneratedTiles;
     private BackgroundTile[,] allTiles;
+    private HeroBoard heroBoard;
     // Start is called before the first frame update
     void Start()
     {
         allTiles = new BackgroundTile[width, height];
         allGeneratedTiles = new GameObject[width,height];
         findMatches = FindObjectOfType<FindMatches>();
+        heroBoard = FindObjectOfType<HeroBoard>();
         SetUp();
     }
 
@@ -94,19 +96,30 @@ public class Board : MonoBehaviour
 
     private void DestroyMatchesAt(int col, int row){
         if (allGeneratedTiles[col,row].GetComponent<Tile>().isMatched){
+            heroBoard.AccumulateDamage(allGeneratedTiles[col,row]);
             findMatches.currentMatches.Remove(allGeneratedTiles[col,row]);
             Destroy(allGeneratedTiles[col,row]);
             allGeneratedTiles[col,row] = null;
         }
     }
 
+    public void DoDamageToMonsters(Dictionary<HeroType,int> totalDamage) {
+        return;
+    }
+
     public void DestroyMatches(){
+        int numberOfPiecesDestroyed = 0;
         for (int i=0; i<width; i++){
             for (int j=0; j<height; j++){
                 if(allGeneratedTiles[i,j] != null){
+                    numberOfPiecesDestroyed++;
                     DestroyMatchesAt(i,j);
                 }
             }
+        }
+        if(numberOfPiecesDestroyed >= 3) {
+            var damage = heroBoard.CalculateTotalDamage();
+            DoDamageToMonsters(damage);
         }
         StartCoroutine(DecreaseRowCo());
     }
@@ -149,6 +162,7 @@ public class Board : MonoBehaviour
                     Vector2 tempPosition = new Vector2(i,j+offSet);
                     int tileToUse = Random.Range(0,tiles.Length);
                     GameObject piece = Instantiate(tiles[tileToUse], tempPosition, Quaternion.identity);
+                    piece.transform.parent = this.transform;
                     allGeneratedTiles[i,j] = piece;
                     piece.GetComponent<Tile>().row = j;
                     piece.GetComponent<Tile>().col = i;
@@ -182,5 +196,12 @@ public class Board : MonoBehaviour
     }
 
 
-
+    private int SumDamageTypes(Dictionary<HeroType, int> damageDict) {
+        int totalDamage = 0;
+        foreach (var item in damageDict)
+        {
+            totalDamage+= item.Value;
+        }
+        return totalDamage;
+    }
 }

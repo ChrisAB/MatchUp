@@ -12,6 +12,17 @@ public class HeroBoard : MonoBehaviour
     public GameObject[] allGeneratedHeroes;
     private static ArrayList usedIndexes = new ArrayList();
     private HeroTile[] allHeroes;
+
+    private Dictionary<HeroType, int> numberOfMatches = new Dictionary<HeroType, int>() {
+        {HeroType.DARKNESS,0},
+        {HeroType.WATER,0},
+        {HeroType.ICE,0},
+		{HeroType.FIRE,0},
+        {HeroType.STONE,0},
+        {HeroType.ELECTRO,0},
+        {HeroType.NORMAL,0}
+    };
+
     void Start()
     {
         allHeroes = new HeroTile[width];
@@ -42,7 +53,7 @@ public class HeroBoard : MonoBehaviour
                 heroTile.name = "Hero"+ i;
                 
                 allGeneratedHeroes[i] = heroTile;
-            
+                allHeroes[i] = heroTile.GetComponent<HeroTile>();
             }
         
     }
@@ -59,5 +70,42 @@ public class HeroBoard : MonoBehaviour
     private int checkindex(int index){
         if (usedIndexes.Contains(index)) return 1;
         return 0;
+    }
+
+    public void AccumulateDamage(GameObject pieceObject) {
+        Tile tile = pieceObject.GetComponent<Tile>();
+        numberOfMatches[tile.ConvertTagToHeroType()]++;
+    }
+
+    public int CalculateTypeDamage(HeroType type) {
+        int damage = 0;
+        foreach (HeroTile item in allHeroes)
+        {
+            if(item.heroType == type) {
+                damage += numberOfMatches[type] * 2;
+            } else if(item.heroType == HeroType.NORMAL) {
+                damage += numberOfMatches[type];
+            }
+        }
+        return damage;
+    }
+
+    public Dictionary<HeroType,int> CalculateTotalDamage() {
+        Dictionary<HeroType, int> totalDamage = new Dictionary<HeroType, int>() {
+            {HeroType.DARKNESS,0},
+            {HeroType.WATER,0},
+            {HeroType.ICE,0},
+	    	{HeroType.FIRE,0},
+            {HeroType.STONE,0},
+            {HeroType.ELECTRO,0},
+            {HeroType.NORMAL,0}
+        };
+
+        foreach (KeyValuePair<HeroType, int> item in numberOfMatches)
+        {
+            totalDamage[item.Key] += CalculateTypeDamage(item.Key);
+            numberOfMatches[item.Key] = 0;
+        }
+        return totalDamage;
     }
 }

@@ -191,4 +191,25 @@ public class Tile : MonoBehaviour
         }
     }
 
+    public HeroType ConvertTagToHeroType() {
+        switch(this.tag) {
+            case "darkness":
+                return HeroType.DARKNESS;
+            case "water":
+                return HeroType.WATER;
+            case "ice":
+                return HeroType.ICE;
+            case "fire":
+                return HeroType.FIRE;
+            case "stone":
+                return HeroType.STONE;
+            case "electro":
+                return HeroType.ELECTRO;
+            case "normal":
+                return HeroType.NORMAL;
+            default:
+                return HeroType.NORMAL;
+        }
+    }
+
 }

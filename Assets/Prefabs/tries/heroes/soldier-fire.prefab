@@ -33,14 +33,14 @@ Transform:
 --- !u!1 &3842411154908930985
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3239205521112816239, guid: 41345b542097dbd4baa292dbcb59e2ee,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 977641020575551761}
   - component: {fileID: 3987208919393112331}
+  - component: {fileID: 7930871994694499985}
   m_Layer: 0
   m_Name: soldier-fire
   m_TagString: Untagged
@@ -51,8 +51,7 @@ GameObject:
 --- !u!4 &977641020575551761
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1259985917571574646, guid: 41345b542097dbd4baa292dbcb59e2ee,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3842411154908930985}
@@ -68,8 +67,7 @@ Transform:
 --- !u!212 &3987208919393112331
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2151584857430944881, guid: 41345b542097dbd4baa292dbcb59e2ee,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3842411154908930985}
@@ -116,6 +114,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7930871994694499985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842411154908930985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9381d6e7b134c4394bbf72facc134c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroType: 3
 --- !u!1 &8283749167573915332
 GameObject:
   m_ObjectHideFlags: 0

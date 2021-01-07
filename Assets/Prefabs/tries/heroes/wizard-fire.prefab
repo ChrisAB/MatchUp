@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1681828709832670625}
   - component: {fileID: 5433772127985902119}
+  - component: {fileID: 8412879818316325987}
   m_Layer: 0
   m_Name: wizard-fire
   m_TagString: Untagged
@@ -113,6 +114,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8412879818316325987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3448731575580659973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9381d6e7b134c4394bbf72facc134c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroType: 3
 --- !u!1 &6076903881369454276
 GameObject:
   m_ObjectHideFlags: 0
