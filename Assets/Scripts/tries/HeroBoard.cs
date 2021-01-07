@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class HeroBoard : MonoBehaviour
 {
@@ -14,19 +15,22 @@ public class HeroBoard : MonoBehaviour
     private HeroTile[] allHeroes;
 
     private Dictionary<HeroType, int> numberOfMatches = new Dictionary<HeroType, int>() {
-        {HeroType.DARKNESS,0},
-        {HeroType.WATER,0},
-        {HeroType.ICE,0},
-		{HeroType.FIRE,0},
-        {HeroType.STONE,0},
-        {HeroType.ELECTRO,0},
-        {HeroType.NORMAL,0}
+        {HeroType.DARKNESS,1},
+        {HeroType.WATER,1},
+        {HeroType.ICE,1},
+		{HeroType.FIRE,1},
+        {HeroType.STONE,1},
+        {HeroType.ELECTRO,1},
+        {HeroType.NORMAL,1}
     };
+
+    private List<HeroType> numberOfMatcherKeysList;
 
     void Start()
     {
         allHeroes = new HeroTile[width];
         allGeneratedHeroes = new GameObject[width];
+        numberOfMatcherKeysList = new List<HeroType>(numberOfMatches.Keys);
         SetUp();
     }
 
@@ -101,10 +105,10 @@ public class HeroBoard : MonoBehaviour
             {HeroType.NORMAL,0}
         };
 
-        foreach (KeyValuePair<HeroType, int> item in numberOfMatches)
+        foreach (HeroType item in numberOfMatcherKeysList)
         {
-            totalDamage[item.Key] += CalculateTypeDamage(item.Key);
-            numberOfMatches[item.Key] = 0;
+            totalDamage[item] += CalculateTypeDamage(item);
+            numberOfMatches[item] = 0;
         }
         return totalDamage;
     }

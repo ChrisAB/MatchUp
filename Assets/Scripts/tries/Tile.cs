@@ -193,19 +193,19 @@ public class Tile : MonoBehaviour
 
     public HeroType ConvertTagToHeroType() {
         switch(this.tag) {
-            case "darkness":
+            case "Darkness-Tile":
                 return HeroType.DARKNESS;
-            case "water":
+            case "Water-Tile":
                 return HeroType.WATER;
-            case "ice":
+            case "Ice-Tile":
                 return HeroType.ICE;
-            case "fire":
+            case "Fire-Tile":
                 return HeroType.FIRE;
-            case "stone":
+            case "Stone-Tile":
                 return HeroType.STONE;
-            case "electro":
+            case "Electro-Tile":
                 return HeroType.ELECTRO;
-            case "normal":
+            case "Normal-Tile":
                 return HeroType.NORMAL;
             default:
                 return HeroType.NORMAL;
