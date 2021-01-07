@@ -17,6 +17,7 @@ public class Board : MonoBehaviour
     public GameObject tilePrefab;
     public GameObject[] tiles;
     public GameObject[,] allGeneratedTiles;
+    public Tile currentTile;
     private BackgroundTile[,] allTiles;
     // Start is called before the first frame update
     void Start()
@@ -94,6 +95,10 @@ public class Board : MonoBehaviour
 
     private void DestroyMatchesAt(int col, int row){
         if (allGeneratedTiles[col,row].GetComponent<Tile>().isMatched){
+            if(findMatches.currentMatches.Count == 4 ||
+                findMatches.currentMatches.Count == 7){
+                    findMatches.CheckBombs();
+            }
             findMatches.currentMatches.Remove(allGeneratedTiles[col,row]);
             Destroy(allGeneratedTiles[col,row]);
             allGeneratedTiles[col,row] = null;
@@ -180,6 +185,8 @@ public class Board : MonoBehaviour
             yield return new WaitForSeconds(.0f);
             DestroyMatches();
         }
+        findMatches.currentMatches.Clear();
+        currentTile = null;
         yield return new WaitForSeconds(.5f);
         currentState=GameState.MOVE;
     }

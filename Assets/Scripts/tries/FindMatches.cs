@@ -121,7 +121,7 @@ public class FindMatches : MonoBehaviour
         return tiles;
     }
 
-     List<GameObject> GetRowPieces(int row){
+    List<GameObject> GetRowPieces(int row){
         List<GameObject> tiles = new List<GameObject>();
         for (int i = 0; i< board.width; i++){
             if(board.allGeneratedTiles[i,row]!=null){
@@ -131,4 +131,56 @@ public class FindMatches : MonoBehaviour
         }
         return tiles;
     }
+
+    public void CheckBombs(){
+        if (board.currentTile != null){
+            //Is matched
+            if(board.currentTile.isMatched){
+                board.currentTile.isMatched=false;
+                if( (board.currentTile.swipeAngle>-45 && board.currentTile.swipeAngle <=45) ||
+                    (board.currentTile.swipeAngle >= 135 || board.currentTile.swipeAngle <-135)){
+                        board.currentTile.MakeRowBomb();
+                }else {
+                        board.currentTile.MakeColumnBomb();
+                }                    
+                /*
+                int typeBomb = Random.Range(0,100);
+                if(typeBomb<50){
+                    //ROW
+                    board.currentTile.MakeRowBomb();
+                }else if(typeBomb>=50){
+                    //COLUMN
+                    board.currentTile.MakeColumnBomb();
+                }
+                */
+
+            }else if (board.currentTile.otherTile != null){
+                //is other piece matched
+                Tile otherTile = board.currentTile.otherTile.GetComponent<Tile>();
+                if(otherTile.isMatched){
+                    otherTile.isMatched=false;
+                    if( (board.currentTile.swipeAngle>-45 && board.currentTile.swipeAngle <=45) ||
+                    (board.currentTile.swipeAngle >= 135 || board.currentTile.swipeAngle <-135)){
+                        otherTile.MakeRowBomb();
+                    }else {
+                        otherTile.MakeColumnBomb();
+                    }                 
+                    /*
+                    int typeBomb = Random.Range(0,100);
+                    if(typeBomb<50){
+                        //ROW
+                        otherTile.MakeRowBomb();
+                    }else if(typeBomb>=50){
+                        //COLUMN
+                        otherTile.MakeColumnBomb();
+                    }
+                    */
+                }
+
+            }
+            
+            
+        }
+    }
+
 }

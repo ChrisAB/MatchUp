@@ -13,7 +13,7 @@ public class Tile : MonoBehaviour
     public int targetX, targetY;
     public bool isMatched = false;
 
-    private GameObject otherTile;
+    public GameObject otherTile;
     private FindMatches findMatches;
     private Board board;
     private Vector2 firstTouchPosition;
@@ -58,11 +58,11 @@ public class Tile : MonoBehaviour
     void Update()
     {
         //FindMatches();
-        
+        /*
         if (isMatched==true){
             SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
             mySprite.color = new Color(102,45,145,.2f);
-        }
+        }*/
         targetX=col;
         targetY=row;
         try{
@@ -107,11 +107,12 @@ public class Tile : MonoBehaviour
                 row = previousRow;
                 col = previousColumn;
                 yield return new WaitForSeconds(.5f);
+                board.currentTile = null;
                 board.currentState = GameState.MOVE;
             }else{
                 board.DestroyMatches();
             }
-            otherTile = null;
+            //otherTile = null;
         }
     }
 
@@ -137,11 +138,12 @@ public class Tile : MonoBehaviour
             try {
                 MovePieces();
                 board.currentState = GameState.WAIT;
+                board.currentTile = this;
             }catch(System.IndexOutOfRangeException e){
                 Debug.Log ("Out of range happened");
             }
         }else {
-            board.currentState = GameState.MOVE;
+            board.currentState = GameState.MOVE;     
         }
     }
     void MovePieces(){
@@ -191,6 +193,18 @@ public class Tile : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void MakeRowBomb(){
+        isRowBomb = true;
+        GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
+        arrow.transform.parent = this.transform;
+    }
+
+    public void MakeColumnBomb(){
+        isColBomb = true;
+        GameObject arrow = Instantiate(colArrow, transform.position, Quaternion.identity);
+        arrow.transform.parent = this.transform;
     }
 
 }
