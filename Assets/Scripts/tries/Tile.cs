@@ -24,7 +24,8 @@ public class Tile : MonoBehaviour
     public float swipeMax = 2f;
 
     [Header("PwerUp")]
-    public bool isColBomb, isRowBomb;
+    public bool isColBomb; 
+     public bool isRowBomb;
     public GameObject rowArrow, colArrow;
 
     void Start()
@@ -47,7 +48,7 @@ public class Tile : MonoBehaviour
     //Debug
     private void OnMouseOver(){
         if(Input.GetMouseButtonDown(1)){
-            isColBomb = true;
+            isRowBomb = true;
             GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
             arrow.transform.parent = this.transform;
         }

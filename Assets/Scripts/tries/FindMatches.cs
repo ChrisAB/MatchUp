@@ -30,11 +30,26 @@ public class FindMatches : MonoBehaviour
                         GameObject rightTile = board.allGeneratedTiles[i+1,j];
                         if(leftTile!=null && rightTile!=null){
                             if(leftTile.tag == currentTile.tag && rightTile.tag == currentTile.tag){
+                                //COULMN BOMB
+                                if(currentTile.GetComponent<Tile>().isColBomb){
+                                        currentMatches.Union(GetColumnPieces(i));
+                                        //Debug.Log("Gets Here");
+                                }else if(leftTile.GetComponent<Tile>().isColBomb){
+                                        currentMatches.Union(GetColumnPieces(i-1));
+                                        //Debug.Log("Gets Here");
+                                }else if(rightTile.GetComponent<Tile>().isColBomb){
+                                        currentMatches.Union(GetColumnPieces(i+1));
+                                        //Debug.Log("Gets Here");
+                                } 
+                                //ROW BOMB
                                 if(currentTile.GetComponent<Tile>().isRowBomb ||
                                     leftTile.GetComponent<Tile>().isRowBomb ||
                                     rightTile.GetComponent<Tile>().isRowBomb){
                                         currentMatches.Union(GetRowPieces(j));
-                                    } 
+                                        Debug.Log("Gets Here");
+                                    }
+
+                                //ADD TO CURRENT MATCHES 
                                 if(!currentMatches.Contains(leftTile)){
                                     currentMatches.Add(leftTile);
                                 }
@@ -56,6 +71,25 @@ public class FindMatches : MonoBehaviour
                         GameObject downTile = board.allGeneratedTiles[i,j-1];
                         if(upTile!=null && downTile!=null){
                             if(upTile.tag == currentTile.tag && downTile.tag == currentTile.tag){
+                                //COLUMNBOMB
+                                if(currentTile.GetComponent<Tile>().isColBomb ||
+                                    upTile.GetComponent<Tile>().isColBomb ||
+                                    downTile.GetComponent<Tile>().isColBomb){
+                                        currentMatches.Union(GetColumnPieces(i));
+                                        //Debug.Log("Gets Here");
+                                } 
+                                //ROW BOMB
+                                if(currentTile.GetComponent<Tile>().isRowBomb){
+                                        currentMatches.Union(GetRowPieces(j));
+                                        //Debug.Log("Gets Here");
+                                }else if(upTile.GetComponent<Tile>().isRowBomb){
+                                        currentMatches.Union(GetRowPieces(j+1));
+                                        //Debug.Log("Gets Here");
+                                }else if(downTile.GetComponent<Tile>().isRowBomb){
+                                        currentMatches.Union(GetRowPieces(j-1));
+                                        //Debug.Log("Gets Here");
+                                } 
+                                //ADD TO CURRENT  MATCHES
                                 if(!currentMatches.Contains(upTile)){
                                     currentMatches.Add(upTile);
                                 }
