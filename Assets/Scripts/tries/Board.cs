@@ -119,6 +119,7 @@ public class Board : MonoBehaviour
         }
         if(numberOfPiecesDestroyed >= 3) {
             var damage = heroBoard.CalculateTotalDamage();
+            Debug.Log(SumDamageTypes(damage));
             DoDamageToMonsters(damage);
         }
         StartCoroutine(DecreaseRowCo());
