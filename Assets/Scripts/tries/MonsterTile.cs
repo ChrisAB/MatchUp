@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class MonsterTile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  public int damage;
+  private int maxHP;
+  private int HP;
+  // Start is called before the first frame update
+  void Start()
+  {
+    maxHP = 100;
+    HP = maxHP;
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  // Update is called once per frame
+  void Update()
+  {
+
+  }
+
+  public int GetDamage()
+  {
+    return damage;
+  }
+
+  public void TakeDamage(int damagaToTake)
+  {
+    HP -= damagaToTake;
+  }
+
+  public bool IsAlive()
+  {
+    return HP > 0 ? true : false;
+  }
 }
