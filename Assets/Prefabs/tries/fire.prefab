@@ -123,6 +123,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: 0
   row: 0
+  previousColumn: 0
+  previousRow: 0
   targetX: 0
   targetY: 0
+  isMatched: 0
   swipeAngle: 0
+  swipeResist: 1
+  swipeMax: 2
+  isColBomb: 0
+  isRowBomb: 0
+  rowArrow: {fileID: 9165359894453821864, guid: 98f5cd60a23180e4c9f39d0a03b6931b,
+    type: 3}
+  colArrow: {fileID: 7014945003589194796, guid: a6f14a2e3288fc641abf74a0d37af6f1,
+    type: 3}

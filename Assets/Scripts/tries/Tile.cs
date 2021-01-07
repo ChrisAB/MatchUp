@@ -21,8 +21,16 @@ public class Tile : MonoBehaviour
     public float swipeAngle = 0;
     public float swipeResist = 1f;
     public float swipeMax = 2f;
+
+    [Header("PwerUp")]
+    public bool isColBomb, isRowBomb;
+    public GameObject rowArrow, colArrow;
+
     void Start()
     {
+        isColBomb =false;
+        isRowBomb=false;
+
         board = FindObjectOfType<Board>();
         findMatches = FindObjectOfType<FindMatches>();
         /*
@@ -35,15 +43,24 @@ public class Tile : MonoBehaviour
         previousRow=row;*/
     }
 
+    //Debug
+    private void OnMouseOver(){
+        if(Input.GetMouseButtonDown(1)){
+            isColBomb = true;
+            GameObject arrow = Instantiate(colArrow, transform.position, Quaternion.identity);
+            arrow.transform.parent = this.transform;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         //FindMatches();
-        /*
+        
         if (isMatched==true){
             SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
-            mySprite.color = new Color(0,0,0,.2f);
-        }*/
+            mySprite.color = new Color(102,45,145,.2f);
+        }
         targetX=col;
         targetY=row;
         try{
