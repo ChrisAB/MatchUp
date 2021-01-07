@@ -41,7 +41,7 @@ public class MonsterBoard : MonoBehaviour
       // tile prefab from array , where the background tile is 
       GameObject monsterTile = Instantiate(monsters[monsterToUse], tempPosition, Quaternion.identity);
       monsterTile.transform.parent = this.transform; // tile child of background tile
-      monsterTile.name = "Hero" + i;
+      monsterTile.name = "Monster" + i;
 
       allGeneratedMonsters[i] = monsterTile;
       allMonsters[i] = monsterTile.GetComponent<MonsterTile>();

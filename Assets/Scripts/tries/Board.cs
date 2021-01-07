@@ -20,6 +20,7 @@ public class Board : MonoBehaviour
     public Tile currentTile;
     private BackgroundTile[,] allTiles;
     private HeroBoard heroBoard;
+    private MonsterBoard monsterBoard;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class Board : MonoBehaviour
         allGeneratedTiles = new GameObject[width,height];
         findMatches = FindObjectOfType<FindMatches>();
         heroBoard = FindObjectOfType<HeroBoard>();
+        monsterBoard = FindObjectOfType<MonsterBoard>();
         SetUp();
     }
 
@@ -125,8 +127,7 @@ public class Board : MonoBehaviour
         }
         if(numberOfPiecesDestroyed >= 3) {
             var damage = heroBoard.CalculateTotalDamage();
-            Debug.Log(SumDamageTypes(damage));
-            DoDamageToMonsters(damage);
+            monsterBoard.TakeDamage(SumDamageTypes(damage));
         }
         StartCoroutine(DecreaseRowCo());
     }
