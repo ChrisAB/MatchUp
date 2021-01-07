@@ -319,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543129062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.448596, y: 0.2612424, z: 107.453125}
+  m_LocalPosition: {x: 72.17, y: 128.76, z: 107.453125}
   m_LocalScale: {x: 1.820528, y: 1.820528, z: 1.820528}
   m_Children: []
   m_Father: {fileID: 332021486}
@@ -361,8 +361,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 192, y: 285}
-  m_SizeDelta: {x: 199.7312, y: 82.06305}
+  m_AnchoredPosition: {x: 190, y: 317}
+  m_SizeDelta: {x: 132.51389, y: 54.445633}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &878594012
 MonoBehaviour:
@@ -489,8 +489,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 191, y: 311}
-  m_SizeDelta: {x: 452.3612, y: 791.96594}
+  m_AnchoredPosition: {x: 184, y: 326}
+  m_SizeDelta: {x: 253.47772, y: 443.77295}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1215993448
 MonoBehaviour:
@@ -864,7 +864,7 @@ GameObject:
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
