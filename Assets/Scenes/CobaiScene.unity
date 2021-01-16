@@ -184,6 +184,7 @@ Transform:
   - {fileID: 1471078908}
   - {fileID: 433455966}
   - {fileID: 1680991882}
+  - {fileID: 691744324}
   m_Father: {fileID: 1508588049}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -319,12 +320,67 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543129062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 72.17, y: 128.76, z: 107.453125}
-  m_LocalScale: {x: 1.820528, y: 1.820528, z: 1.820528}
+  m_LocalPosition: {x: 39.3, y: 71.3, z: 107.453125}
+  m_LocalScale: {x: 2, y: 2, z: 1.820528}
   m_Children: []
   m_Father: {fileID: 332021486}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &691744323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691744324}
+  - component: {fileID: 691744325}
+  m_Layer: 0
+  m_Name: MonsterBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &691744324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691744323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.888596, y: 19.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 332021486}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &691744325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691744323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2ceeaca8289f35e9cfb13380cd5262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 4
+  monsterPrefab: {fileID: 2544205786081578310, guid: 1d9ad17cab8868ecba6ee4596d84ba5e,
+    type: 3}
+  monsters:
+  - {fileID: 8576310077502365313, guid: 278f430cc5d47b6a886ad42499a4dd2d, type: 3}
+  - {fileID: 544273400158097341, guid: 3f57451efd24bcecfa7dabf5cfa99cb1, type: 3}
+  - {fileID: 7086984249769135416, guid: 48a0cdf07bd16c9e89a8020ee8a3cd56, type: 3}
+  - {fileID: 1839140398557066632, guid: 9fe0976be8c210e05a06204dbe755d34, type: 3}
+  - {fileID: 1204495927438687070, guid: c0c31490a09ed43208b34c325a2aef29, type: 3}
+  - {fileID: 5692154660022932674, guid: 7fae7b09ed7198df18e6f4b0962ddc55, type: 3}
+  - {fileID: 1371089951871155596, guid: d7f818443eb54b38885efd5611322026, type: 3}
+  allGeneratedMonsters: []
 --- !u!1 &878594010
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +546,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 184, y: 326}
-  m_SizeDelta: {x: 253.47772, y: 443.77295}
+  m_SizeDelta: {x: 310, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1215993448
 MonoBehaviour:
@@ -708,6 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aceae4ec3f162146bd3a8de5bf887b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
   currentState: 1
   width: 7
   height: 10
