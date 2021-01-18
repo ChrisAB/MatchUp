@@ -16,9 +16,9 @@ public class Tile : MonoBehaviour
     public GameObject otherTile;
     private FindMatches findMatches;
     private Board board;
-    private Vector2 firstTouchPosition;
-    private Vector2 finalTouchPosition;
-    private Vector2 tempPosition;
+    private Vector3 firstTouchPosition;
+    private Vector3 finalTouchPosition;
+    private Vector3 tempPosition;
     public float swipeAngle = 0;
     public float swipeResist = 1f;
     public float swipeMax = 2f;
@@ -68,29 +68,29 @@ public class Tile : MonoBehaviour
         try{
             if(Mathf.Abs(targetX-transform.position.x) > .1){ //horizontal
                 //Move to the target
-                tempPosition = new Vector2(targetX,transform.position.y);
-                transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
+                tempPosition = new Vector3(targetX,transform.position.y, 10f);
+                transform.position = Vector3.Lerp(transform.position, tempPosition, .6f);
                 if (board.allGeneratedTiles[col,row]!= this.gameObject){
                     board.allGeneratedTiles[col,row] = this.gameObject;
                 }
                 findMatches.FindAllMatches();
             }else{
                 //Directly set position
-                tempPosition = new Vector2(targetX,transform.position.y);
+                tempPosition = new Vector3(targetX,transform.position.y, 10f);
                 transform.position = tempPosition;
             }
 
             if(Mathf.Abs(targetY-transform.position.y) > .1){//vertical
                 //Move to the target
-                tempPosition = new Vector2(transform.position.x, targetY);
-                transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
+                tempPosition = new Vector3(transform.position.x, targetY, 10f);
+                transform.position = Vector3.Lerp(transform.position, tempPosition, .6f);
                  if (board.allGeneratedTiles[col,row]!= this.gameObject){
                     board.allGeneratedTiles[col,row] = this.gameObject;
                 }
                 findMatches.FindAllMatches();
             }else{
                 //Directly set position
-                tempPosition = new Vector2(transform.position.x, targetY);
+                tempPosition = new Vector3(transform.position.x, targetY, 10f);
                 transform.position = tempPosition;
             }
         }catch(System.IndexOutOfRangeException e){

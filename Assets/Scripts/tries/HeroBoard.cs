@@ -43,7 +43,7 @@ public class HeroBoard : MonoBehaviour
     {
         for (int i=0; i< width; i++)
             {
-                Vector2 tempPosition = new Vector2((i-0.5f)*2.5f, -2);
+                Vector3 tempPosition = new Vector3((i-0.5f), 0.0f, 5.0f);
                 //what we instantiate, position , rotation
                 GameObject backgroundTile = Instantiate(heroPrefab, tempPosition, Quaternion.identity) as GameObject;
                 backgroundTile.transform.parent = this.transform; //change parent to board

@@ -44,9 +44,9 @@ public class Board : MonoBehaviour
     {
         for (int i=0; i< width; i++)
             for (int j =0; j<height; j++){
-                Vector2 tempPosition = new Vector2(i, j + offSet);
+                Vector3 tempPosition = new Vector3(i, j + offSet, 10f);
                 //what we instantiate, position , rotation
-                Vector2 bgTiletempPosition = new Vector2(i, j);
+                Vector3 bgTiletempPosition = new Vector3(i, j, 10f);
                 GameObject backgroundTile = Instantiate(tilePrefab, bgTiletempPosition, Quaternion.identity) as GameObject;
                 backgroundTile.transform.parent = this.transform; //change parent to board
                 backgroundTile.name = "BG:(" + i + ","+ j + ")";
@@ -178,7 +178,7 @@ public class Board : MonoBehaviour
         for (int i = 0; i < width; i ++){
             for (int j = 0; j < height; j ++){
                 if (allGeneratedTiles[i,j] == null){
-                    Vector2 tempPosition = new Vector2(i,j+offSet);
+                    Vector3 tempPosition = new Vector3(i,j+offSet, 10f);
                     int tileToUse = Random.Range(0,tiles.Length);
                     GameObject piece = Instantiate(tiles[tileToUse], tempPosition, Quaternion.identity);
                     piece.transform.parent = this.transform;
